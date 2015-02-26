@@ -13,15 +13,18 @@ Internal documentation for development.
 Make sure node.js is installed: [nodejs.org](http://nodejs.org/)
 
 Install bower:
-```npm install bower
+```
+npm install bower
 ```
 
 In the project directory, install dependencies with bower:
-```bower install
+```
+bower install
 ```
 
 To run the game, run from WebStorm, or start webserver at project root:
-```python -m SimpleHTTPServer 9090
+```
+python -m SimpleHTTPServer 9090
 ```
 
 # Resources
@@ -39,3 +42,7 @@ To run the game, run from WebStorm, or start webserver at project root:
 [Phaser example snippets](http://examples.phaser.io/sideview.html)
 
 [Phaser Forum](http://www.html5gamedevs.com/forum/14-phaser/)
+
+[Free Game Graphics](http://opengameart.org/art-search-advanced?keys=&field_art_type_tid[]=9)
+
+[Royalty Free Graphics](http://www.pixelprospector.com/the-big-list-of-royalty-free-graphics/)
