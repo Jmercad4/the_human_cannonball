@@ -1,0 +1,19 @@
+{
+  "name": "hci-human-cannonball",
+  "version": "0.0.0",
+  "homepage": "https://github.com/linjoey/hci-human-cannonball",
+  "authors": [
+    "Zhao Joe Lin <zlin45@uwo.com>",
+    "Tommy (Tam) Tran <ttran244@uwo.ca>",
+    "Jussie Mercado <jmercad4@uwo.ca>",
+    "Xiao (Sherry) Chen <xchen389@uwo.ca>"
+
+  ],
+  "description": "HTML5 human cannonball game",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "dependencies" : {
+    "phaser": "~2.2.x"
+  }
+}
