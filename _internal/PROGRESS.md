@@ -3,6 +3,13 @@
 Let's keep track of weekly progress, goals, and tasks.
 
 ## Week 1: Feb 26
+
+- Move controls to the bottom
+- Big controls
+- Wheel for angle adjustment
+- Slider for power
+- Fire button
+
 1. Finish Design Docs
 2. Set up dev environment on you system
     1. Get introduced to Phaser framework

@@ -35,8 +35,6 @@ python -m SimpleHTTPServer 9090
 
 [Phaser function order/descriptions](http://www.html5gamedevs.com/topic/1372-phaser-function-order-reserved-names-and-special-uses/)
 
-[Phaser Tutorial 1](http://www.photonstorm.com/phaser/tutorial-making-your-first-phaser-game)
-
 [Game Mechanic Explorer](http://gamemechanicexplorer.com/#platformer-6)
 
 [Phaser example snippets](http://examples.phaser.io/sideview.html)
@@ -46,3 +44,8 @@ python -m SimpleHTTPServer 9090
 [Free Game Graphics](http://opengameart.org/art-search-advanced?keys=&field_art_type_tid[]=9)
 
 [Royalty Free Graphics](http://www.pixelprospector.com/the-big-list-of-royalty-free-graphics/)
+
+# Tutorials
+[Phaser Tutorial: Basic Concepts](http://www.photonstorm.com/phaser/tutorial-making-your-first-phaser-game)
+
+[State Mangement](http://www.emanueleferonato.com/2014/08/28/phaser-tutorial-understanding-phaser-states/)
