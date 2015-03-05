@@ -11,6 +11,7 @@ Jussie Mercado (jmercad4@uwo.ca)
 
 Xiao (Sherry) Chen (xchen389@uwo.ca)
 
+Antoine Alarie (aalarie2@uwo.ca)
 
 # License
 MIT
