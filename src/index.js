@@ -1,5 +1,7 @@
+/**
+ *
+ *
+ */
 
-
-
-console.log('HCI');
+ var ajtxz_hcgame = {};
 

@@ -4,17 +4,40 @@
     <meta charset="UTF-8">
     <title>human-cannonball demo</title>
 </head>
+<style>
+
+</style>
 <body>
 
+<div>
+    <div id="game-container"></div>
 
-HELLO world
+</div>
 
 
 
 
-<!--js scripts-->
+
+<!--js library scripts-->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/lodash/lodash.min.js"></script>
 <script src="bower_components/phaser/build/phaser.min.js"></script>
+
+<!--game scripts-->
+<!--Include all sources manually for now (ideally auto-concat with gulp)-->
+<!--make sure dependent files are included first-->
 <script src="src/index.js"></script>
+<script src="src/boot_state.js"></script>
+<script src="src/ajtxz_hcgame.js"></script>
+
 <!-------------->
+
+<script>
+    new ajtxz_hcgame.game({
+        //Game options
+        id: "game-container"
+    }).start();
+</script>
+
 </body>
 </html>

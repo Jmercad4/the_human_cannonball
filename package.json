@@ -1,0 +1,15 @@
+
+{
+  "name": "hci-human-cannonball",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": ["html5", "game"],
+  "repository": "https://github.com/linjoey/hci-human-cannonball",
+  "author": "",
+  "dependencies": {
+  },
+  "main": "index",
+  "scripts": {
+    "start": "python -m SimpleHTTPServer 9090"
+  }
+}
