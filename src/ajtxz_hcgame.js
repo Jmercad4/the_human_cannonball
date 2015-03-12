@@ -1,6 +1,5 @@
 
 
-
 ajtxz_hcgame.game = (function() {
     var self = this;
 
@@ -20,7 +19,24 @@ ajtxz_hcgame.game = (function() {
         var DEFAULT_WIDTH = 900;
         var DEFAULT_HEIGHT = 600;
 
-        this.start = function() {
+        this.loadAsset = function(key, filename, type) {
+            var aType = (type == ajtxz_hcgame.AssetType.IMAGE) ? "images" : "audio";
+            var addr = 'assets/' + aType + "/" + filename;
+            console.log(addr);
+
+            if (type === ajtxz_hcgame.AssetType.IMAGE) {
+                _pGame.load.image(key,addr);
+            }
+
+            //TODO add audio type condition
+
+        }
+
+        this.addAsset = function(x, y, key) {
+            _pGame.add.sprite(x, y, key);
+        }
+
+        this.init = function() {
             console.log("starting game...");
 
             //Make sure Phaser is included

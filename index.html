@@ -28,15 +28,18 @@
 <!--make sure dependent files are included first-->
 <script src="src/index.js"></script>
 <script src="src/boot_state.js"></script>
+<script src="src/levels/1-1.js"></script>
 <script src="src/ajtxz_hcgame.js"></script>
 
 <!-------------->
 
 <script>
-    new ajtxz_hcgame.game({
-        //Game options
-        id: "game-container"
-    }).start();
+
+    ajtxz_hcgame.start({
+        id:"game-container"
+    });
+
+
 </script>
 
 </body>
