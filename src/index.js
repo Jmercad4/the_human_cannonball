@@ -16,12 +16,15 @@ var ajtxz_hcgame = {
     //True only when game is started
     initialized : false,
 
+
     start: function (opt) {
 
         var options = (function () {
             return $.extend({}, {
                 //DEFAULT OPTIONS
-                DEBUG: false    //Display debug info to console
+                DEBUG: false,    //Display debug info to console
+                width: 900,
+                height: 600
 
             }, opt || {});
         }());

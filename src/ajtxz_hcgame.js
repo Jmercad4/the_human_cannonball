@@ -5,15 +5,18 @@ ajtxz_hcgame.game = (function() {
     /**
      * static constants
      */
-
-    var DEFAULT_WIDTH = 900;
-    var DEFAULT_HEIGHT = 600;
+    //
+    //var DEFAULT_WIDTH = 900;
+    //var DEFAULT_HEIGHT = 600;
 
     /**
      * Constructor for our game wrapper
      */
     var game = function(options) {
         var self = this;
+
+        //Expose options object
+        this.options = options;
 
         /**
          * Phaser game instance
@@ -58,7 +61,7 @@ ajtxz_hcgame.game = (function() {
                 return;
             }
 
-            _pGame = new Phaser.Game(DEFAULT_WIDTH, DEFAULT_HEIGHT, Phaser.AUTO, options.id);
+            _pGame = new Phaser.Game(options.width, options.height, Phaser.AUTO, options.id);
 
             //_pGame.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
             _pGame.state.add('boot', ajtxz_hcgame.bootState);

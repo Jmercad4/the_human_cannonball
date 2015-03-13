@@ -41,7 +41,7 @@ ajtxz_hcgame.bootState = function () {
         //simulate progress loading before going to next state
         setTimeout(function(){
             pgame.state.start('lvl1_1');
-        }, 1000);
+        }, 0);
 
     }
 
