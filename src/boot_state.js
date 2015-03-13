@@ -5,12 +5,25 @@ ajtxz_hcgame.bootState = function () {
     //ajtxz_hcgame.game instance !not phaser.game
     var game = ajtxz_hcgame.game;
 
-    this.preload = function() {
-        console.log("boot:preload");
+    //Phaser game instance
+    var pgame = this;
 
-        if(ajtxz_hcgame.initilized) {
+    this.init = function() {
+        game.log("boot state: starting")
+        pgame.scale.scaleMode = Phaser.ScaleManager.NO_SCALE;
+    }
+
+    this.preload = function() {
+
+        if(ajtxz_hcgame.initialized) {
             //TODO load boot screen assets: background + progress bar
-            game.loadAsset('background', 'background.jpg', ajtxz_hcgame.AssetType.IMAGE);
+            game.loadAsset('boot_logo', 'boot_logo.jpg', ajtxz_hcgame.AssetType.IMAGE);
+
+            game.loadAsset('cannon_body', 'cannon_body.png', ajtxz_hcgame.AssetType.IMAGE);
+            game.loadAsset('cannon_stand', 'cannon_stand.png', ajtxz_hcgame.AssetType.IMAGE);
+            game.loadAsset('captain', 'captain.png', ajtxz_hcgame.AssetType.IMAGE);
+
+            
         }
 
     }
@@ -21,11 +34,14 @@ ajtxz_hcgame.bootState = function () {
     }
 
     this.create = function() {
-        console.log("boot:create");
-        game.addAsset(0,0,'background');
+        game.addAsset(200,100,'boot_logo');
 
+        //Call to main menu
 
-        //Call to game start
+        //simulate progress loading before going to next state
+        setTimeout(function(){
+            pgame.state.start('lvl1_1');
+        }, 1000);
 
     }
 

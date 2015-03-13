@@ -28,6 +28,7 @@
 <!--make sure dependent files are included first-->
 <script src="src/index.js"></script>
 <script src="src/boot_state.js"></script>
+<script src="src/levels/levelbase.js"></script>
 <script src="src/levels/1-1.js"></script>
 <script src="src/ajtxz_hcgame.js"></script>
 
@@ -36,7 +37,8 @@
 <script>
 
     ajtxz_hcgame.start({
-        id:"game-container"
+        id:"game-container",
+        DEBUG: true,
     });
 
 

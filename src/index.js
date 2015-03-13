@@ -14,13 +14,14 @@ var ajtxz_hcgame = {
     game: {},
 
     //True only when game is started
-    initilized : false,
+    initialized : false,
 
     start: function (opt) {
 
         var options = (function () {
             return $.extend({}, {
                 //DEFAULT OPTIONS
+                DEBUG: false    //Display debug info to console
 
             }, opt || {});
         }());
@@ -29,7 +30,7 @@ var ajtxz_hcgame = {
         this.game.init();
 
 
-        this.initilized = true;
+        this.initialized = true;
     }
 
 }

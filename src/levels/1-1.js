@@ -1,15 +1,18 @@
 
 ajtxz_hcgame.level1_1 = function () {
 
+    var game = ajtxz_hcgame.game;
+    var pgame = this;
+    var levelbase = new ajtxz_hcgame.levelbase(pgame);
+
     this.preload = function() {
-        console.log("1-1:preload");
     }
 
     this.create = function() {
-        console.log("1-1:create");
+        levelbase.init();
+
     }
 
     this.update = function() {
-        //console.log("boot:update");
     }
 };

@@ -1,15 +1,26 @@
 
-ajtxz_hcgame.levelbase = function () {
 
-    this.preload = function() {
-        console.log("1-1:preload");
+/**
+ * Reusable components for each level
+ * @param pgame current phaser game instance
+ */
+ajtxz_hcgame.levelbase = function (pgame) {
+    var game = ajtxz_hcgame.game;
+    var pgame = this;
+
+    function addDefaultAssets() {
+
+        game.addAsset(10, 20, 'captain');
+        game.addAsset(100, 80, 'cannon_body');
+        game.addAsset(100, 120, 'cannon_stand');
+
     }
 
-    this.create = function() {
-        console.log("1-1:create");
-    }
+    this.init = function() {
+        addDefaultAssets();
 
-    this.update = function() {
-        //console.log("boot:update");
-    }
+
+    };
+
+
 };
