@@ -2,3 +2,4 @@ bower_components/*
 .idea/*
 playground/*
 .DS_Store
+node_modules/*
