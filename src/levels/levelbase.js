@@ -16,7 +16,10 @@ ajtxz_hcgame.levelbase = function (pgame) {
             cs_x = 20,
             cs_y = (options.height * 0.7) + 10;
 
-        game.addAsset(cb_x + 70, cb_y - 10, 'captain');
+        game.captain = game.addAsset(cb_x + 70, cb_y - 10, 'captain');
+        pgame.physics.arcade.enable(game.captain);
+        game.captain.body.collideWorldBounds = true;
+
 
         var cannon_body = game.addAsset(cb_x + 40, cb_y + 20, 'cannon_body')
             .scale.setTo(0.5, 0.5);
@@ -29,23 +32,27 @@ ajtxz_hcgame.levelbase = function (pgame) {
     function drawBackgrounds () {
 
         game.addAsset(0, 0, 'level_background');
-        game.addAsset(0, 480, 'control_board');
+        //game.controlBoard = game.addAsset(0, 480, 'control_board');
+        var g = pgame.add.group();
+        g.enableBody = true;
 
-        pgame.add.button(660, 505, 'fire_button', function() {
-            console.log('fire clicked');
+        game.controlBoard = g.create(0, pgame.world.height - 110, 'control_board');
+        game.controlBoard.body.immovable = true;
+
+
+        pgame.add.button(660, 500, 'fire_button', function() {
+            game.captain.body.gravity.y = 800;
         })
-            .scale.setTo(0.75, 0.75);
-
-
+            .scale.setTo(0.70, 0.70);
     }
 
     this.init = function() {
-        console.log(pgame);
         drawBackgrounds();
         drawCannon_captain();
-
-
     };
 
+    this.defaultUpdate = function() {
+        pgame.physics.arcade.collide(game.captain, game.controlBoard);
+    }
 
 };

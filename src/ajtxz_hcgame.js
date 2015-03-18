@@ -22,13 +22,18 @@ ajtxz_hcgame.game = (function() {
          * Phaser game instance
          */
         var _pGame;
-        //this.getPGame = function(){ return _pGame; }
+        this.pgame = function(){ return _pGame; }
 
         this.log = function(msg) {
             if(options.DEBUG) {
                 console.log('%c ajtxz: ' + msg, 'background: #c0392b; color: white');
             }
         }
+
+
+        this.captain = {};
+
+        this.controlBoard = {};
 
         /**
          * Convenience call for other states to load assets
