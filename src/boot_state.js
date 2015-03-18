@@ -10,7 +10,15 @@ ajtxz_hcgame.bootState = function () {
 
     this.init = function() {
         game.log("boot state: starting")
-        pgame.scale.scaleMode = Phaser.ScaleManager.NO_SCALE;
+
+        this.scale.scaleMode = Phaser.ScaleManager.NO_SCALE;
+        if(game.options.maxScreen) {
+            this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+            this.scale.pageAlignHorizontally = true;
+            this.scale.pageAlignVertically = true;
+            this.scale.setScreenSize(true);
+
+        }
     }
 
     this.preload = function() {

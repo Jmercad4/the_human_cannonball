@@ -22,8 +22,9 @@ var ajtxz_hcgame = {
         var options = (function () {
             return $.extend({}, {
                 //DEFAULT OPTIONS
+                maxScreen: true,    //Display game in max width + auto rescale
                 DEBUG: false,    //Display debug info to console
-                width: 900,
+                width: 1000,
                 height: 600
 
             }, opt || {});
