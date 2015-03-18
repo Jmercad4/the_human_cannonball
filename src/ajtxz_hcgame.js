@@ -22,6 +22,7 @@ ajtxz_hcgame.game = (function() {
          * Phaser game instance
          */
         var _pGame;
+        //this.getPGame = function(){ return _pGame; }
 
         this.log = function(msg) {
             if(options.DEBUG) {
@@ -36,6 +37,10 @@ ajtxz_hcgame.game = (function() {
          * @param type  ajtxz_hcgame.AssetType
          */
         this.loadAsset = function(key, filename, type) {
+            if (typeof type === "undefined") {
+                type = ajtxz_hcgame.AssetType.IMAGE;
+            }
+
             var aType = (type == ajtxz_hcgame.AssetType.IMAGE) ? "images" : "audio";
             var addr = 'assets/' + aType + "/" + filename;
 
@@ -64,8 +69,8 @@ ajtxz_hcgame.game = (function() {
             _pGame = new Phaser.Game(options.width, options.height, Phaser.AUTO, options.id);
 
             //_pGame.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
-            _pGame.state.add('boot', ajtxz_hcgame.bootState);
-            _pGame.state.add('lvl1_1', ajtxz_hcgame.level1_1);
+            _pGame.state.add('boot', new ajtxz_hcgame.bootState);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level1_1);
             _pGame.state.start('boot');
 
         };

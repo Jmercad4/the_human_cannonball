@@ -19,6 +19,8 @@ ajtxz_hcgame.bootState = function () {
             this.scale.setScreenSize(true);
 
         }
+
+        pgame.physics.startSystem(Phaser.Physics.ARCADE);
     }
 
     this.preload = function() {
@@ -26,12 +28,15 @@ ajtxz_hcgame.bootState = function () {
         if(ajtxz_hcgame.initialized) {
             //TODO load boot screen assets: background + progress bar
             game.loadAsset('boot_logo', 'boot_logo.jpg', ajtxz_hcgame.AssetType.IMAGE);
-
             game.loadAsset('cannon_body', 'cannon_body.png', ajtxz_hcgame.AssetType.IMAGE);
             game.loadAsset('cannon_stand', 'cannon_stand.png', ajtxz_hcgame.AssetType.IMAGE);
             game.loadAsset('captain', 'captain.png', ajtxz_hcgame.AssetType.IMAGE);
 
-            
+            game.loadAsset('level_background', 'level_background.png', ajtxz_hcgame.AssetType.IMAGE);
+            game.loadAsset('control_board', 'control_board.png', ajtxz_hcgame.AssetType.IMAGE);
+            game.loadAsset('fire_button', 'fireButton.png', ajtxz_hcgame.AssetType.IMAGE);
+
+
         }
 
     }
@@ -57,7 +62,5 @@ ajtxz_hcgame.bootState = function () {
         //console.log("boot:update");
     }
 
-    this.test = 4;
-
-
 }
+
