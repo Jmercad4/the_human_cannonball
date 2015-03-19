@@ -75,6 +75,7 @@ ajtxz_hcgame.game = (function() {
 
             //_pGame.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
             _pGame.state.add('boot', new ajtxz_hcgame.bootState);
+            _pGame.state.add('preloader',new ajtxz_hcgame.Preloader);
             _pGame.state.add('lvl1_1', new ajtxz_hcgame.level1_1);
             _pGame.state.start('boot');
 

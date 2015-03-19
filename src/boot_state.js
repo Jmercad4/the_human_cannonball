@@ -17,7 +17,7 @@ ajtxz_hcgame.bootState = function () {
             this.scale.pageAlignHorizontally = true;
             this.scale.pageAlignVertically = true;
             this.scale.setScreenSize(true);
-
+            this.stage.backgroundColor = '#ffffff';
         }
 
         pgame.physics.startSystem(Phaser.Physics.ARCADE);
@@ -26,36 +26,13 @@ ajtxz_hcgame.bootState = function () {
     this.preload = function() {
 
         if(ajtxz_hcgame.initialized) {
-            //TODO load boot screen assets: background + progress bar
+            // Load picture for loading page
             game.loadAsset('boot_logo', 'boot_logo.jpg', ajtxz_hcgame.AssetType.IMAGE);
-            game.loadAsset('cannon_body', 'cannon_body.png', ajtxz_hcgame.AssetType.IMAGE);
-            game.loadAsset('cannon_stand', 'cannon_stand.png', ajtxz_hcgame.AssetType.IMAGE);
-            game.loadAsset('captain', 'captain.png', ajtxz_hcgame.AssetType.IMAGE);
-
-            game.loadAsset('level_background', 'level_background.png', ajtxz_hcgame.AssetType.IMAGE);
-            game.loadAsset('control_board', 'control_board.png', ajtxz_hcgame.AssetType.IMAGE);
-            game.loadAsset('fire_button', 'fireButton.png', ajtxz_hcgame.AssetType.IMAGE);
-
-
         }
-
-    }
-
-    this.loadUpdate = function (e) {
-        //TODO update progress bar here
-        //console.log(e);
     }
 
     this.create = function() {
-        game.addAsset(200,100,'boot_logo');
-
-        //Call to main menu
-
-        //simulate progress loading before going to next state
-        setTimeout(function(){
-            pgame.state.start('lvl1_1');
-        }, 0);
-
+        this.state.start('preloader');
     }
 
     this.update = function() {
