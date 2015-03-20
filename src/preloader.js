@@ -18,6 +18,10 @@ ajtxz_hcgame.Preloader = function(){
         // Initialize progress bar to 0 in length
         preloadBar.scale.x = 0;
 
+        // Add text for progress indication
+        this.add.text(this.world.centerX - 50, this.world.centerY+70, 'LOADING...', {font: '18pt Arial', fill: "#000000", stroke: "#ffffff"});
+        percentageText = this.add.text(this.world.centerX + 83, this.world.centerY + 90, percentage + '%', {font:'14pt Arial'});
+
         // Load all assets for entire game
         game.loadAsset('cannon_body', 'cannon_body.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('cannon_stand', 'cannon_stand.png', ajtxz_hcgame.AssetType.IMAGE);
@@ -26,10 +30,7 @@ ajtxz_hcgame.Preloader = function(){
         game.loadAsset('control_board', 'control_board.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('fire_button', 'fireButton.png', ajtxz_hcgame.AssetType.IMAGE);
 
-        // Add text for progress indication
-        this.add.text(this.world.centerX - 50, this.world.centerY+70, 'LOADING...', {font: '18pt Arial', fill: "#000000", stroke: "#ffffff"});
-        percentageText = this.add.text(this.world.centerX + 83, this.world.centerY + 90, percentage + '%', {font:'14pt Arial'});
-
+        
     };
 
     this.create= function () {
