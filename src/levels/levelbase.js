@@ -9,6 +9,14 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
     var options = game.options;
 
+    // Obstacle variable
+    var bird;
+
+    function collide_obstacles(){
+        // Handle collision with obstacles
+
+    }
+
     function drawCannon_captain() {
 
         var cb_x = 10,
@@ -25,6 +33,35 @@ ajtxz_hcgame.levelbase = function (pgame) {
             .scale.setTo(0.5, 0.5);
 
     }
+
+    function drawObstacles(){
+        game.obstacles = pgame.add.group();
+        game.obstacles.enableBody = true;
+
+        bird = game.obstacles.create(pgame.world.centerX, 300, 'bird');
+
+        // Two animations, flying left and right.
+        bird.animations.add('left', [0,1,2,3,4], 10, true);
+        bird.animations.add('right', [5,6,7,8,9], 10, true);
+    }
+
+    this.birdMotion = function(motionDst, motionSpeed){
+        var bird_orientation = 1;
+
+        bird.animations.play('right');
+
+        var tweenbird = pgame.add.tween(bird).to({ x: motionDst }, motionSpeed, Phaser.Easing.Linear.None, true, 0, Number.POSITIVE_INFINITY, true);
+
+        tweenbird.onLoop.add(function(){
+            if (bird_orientation == 1){
+                bird.animations.play('left');
+                bird_orientation = 0;
+            }else{
+                bird.animations.play('right');
+                bird_orientation = 1;
+            }
+        });
+    };
 
     function drawBackgrounds () {
 
@@ -47,6 +84,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
     this.init = function() {
         drawBackgrounds();
         drawCannon_captain();
+        drawObstacles();
 
         pgame.physics.arcade.enable(game.captain);
         game.captain.body.collideWorldBounds = true;
@@ -56,6 +94,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
     this.defaultUpdate = function() {
         pgame.physics.arcade.collide(game.captain, game.controlBoard);
+        pgame.physics.arcade.collide(game.captain, game.obstacles, collide_obstacles);
     }
 
 };
