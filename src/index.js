@@ -5,7 +5,7 @@
 
 var ajtxz_hcgame = {
 
-    "AssetType" : {
+    AssetType : {
         AUDIO: 0,
         IMAGE: 1
     },
