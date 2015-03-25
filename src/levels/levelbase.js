@@ -38,11 +38,20 @@ ajtxz_hcgame.levelbase = function (pgame) {
         game.obstacles = pgame.add.group();
         game.obstacles.enableBody = true;
 
+        // Add bird
         bird = game.obstacles.create(pgame.world.centerX, 300, 'bird');
 
         // Two animations, flying left and right.
         bird.animations.add('left', [0,1,2,3,4], 10, true);
         bird.animations.add('right', [5,6,7,8,9], 10, true);
+
+        // Add water jet
+        var waterjet = game.obstacles.create(pgame.world.centerX-100, 210, 'waterjet');
+        waterjet.immovable = true;
+        waterjet.animations.add('shooting', [0,1], 2, true);
+        waterjet.animations.play('shooting');
+
+        // Add fire rings
     }
 
     this.birdFly = function(motionDst, motionTime){
