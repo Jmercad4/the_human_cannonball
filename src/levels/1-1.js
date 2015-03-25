@@ -13,8 +13,8 @@ ajtxz_hcgame.level1_1 = function () {
 
         // Set bird obstacle attributes and play
         var birdMoveTo = this.world.width - 100;
-        var birdSpeed = 2000;
-        levelbase.birdMotion(birdMoveTo, birdSpeed);
+        var birdMoveTime = 2000;
+        levelbase.birdFly(birdMoveTo, birdMoveTime);
     }
 
     this.update = function() {

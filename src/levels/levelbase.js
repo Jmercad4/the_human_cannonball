@@ -45,12 +45,12 @@ ajtxz_hcgame.levelbase = function (pgame) {
         bird.animations.add('right', [5,6,7,8,9], 10, true);
     }
 
-    this.birdMotion = function(motionDst, motionSpeed){
+    this.birdFly = function(motionDst, motionTime){
         var bird_orientation = 1;
 
         bird.animations.play('right');
 
-        var tweenbird = pgame.add.tween(bird).to({ x: motionDst }, motionSpeed, Phaser.Easing.Linear.None, true, 0, Number.POSITIVE_INFINITY, true);
+        var tweenbird = pgame.add.tween(bird).to({ x: motionDst }, motionTime, Phaser.Easing.Linear.None, true, 0, Number.POSITIVE_INFINITY, true);
 
         tweenbird.onLoop.add(function(){
             if (bird_orientation == 1){
