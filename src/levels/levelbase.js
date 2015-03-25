@@ -83,7 +83,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
         game.controlBoard.body.immovable = true;
 
 
-        pgame.add.button(660, 500, 'fire_button', function() {
+        pgame.add.button(660, 565, 'fire_button', function() {
             game.captain.body.gravity.y = 800;
             game.captain.body.velocity.setTo(500, -800);
 

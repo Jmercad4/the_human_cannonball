@@ -1,6 +1,4 @@
-
-
-ajtxz_hcgame.game = (function() {
+ajtxz_hcgame.game = function () {
 
     /**
      * static constants
@@ -12,7 +10,7 @@ ajtxz_hcgame.game = (function() {
     /**
      * Constructor for our game wrapper
      */
-    var game = function(options) {
+    var game = function (options) {
         var self = this;
 
         //Expose options object
@@ -22,10 +20,12 @@ ajtxz_hcgame.game = (function() {
          * Phaser game instance
          */
         var _pGame;
-        this.pgame = function(){ return _pGame; }
+        this.pgame = function () {
+            return _pGame;
+        }
 
-        this.log = function(msg) {
-            if(options.DEBUG) {
+        this.log = function (msg) {
+            if (options.DEBUG) {
                 console.log('%c ajtxz: ' + msg, 'background: #c0392b; color: white');
             }
         }
@@ -41,7 +41,7 @@ ajtxz_hcgame.game = (function() {
          * @param filename  filename without path
          * @param type  ajtxz_hcgame.AssetType
          */
-        this.loadAsset = function(key, filename, type) {
+        this.loadAsset = function (key, filename, type) {
             if (typeof type === "undefined") {
                 type = ajtxz_hcgame.AssetType.IMAGE;
             }
@@ -50,7 +50,7 @@ ajtxz_hcgame.game = (function() {
             var addr = 'assets/' + aType + "/" + filename;
 
             if (type === ajtxz_hcgame.AssetType.IMAGE) {
-                _pGame.load.image(key,addr);
+                _pGame.load.image(key, addr);
             }
 
             //TODO add audio type condition
@@ -58,15 +58,15 @@ ajtxz_hcgame.game = (function() {
         };
 
 
-        this.addAsset = function(x, y, key) {
+        this.addAsset = function (x, y, key) {
             return _pGame.add.sprite(x, y, key);
         };
 
-        this.init = function() {
+        this.init = function () {
             self.log("starting game...");
 
             //Make sure Phaser is included
-            if(typeof Phaser == 'undefined') {
+            if (typeof Phaser == 'undefined') {
                 console.log('Phaser not installed');
                 return;
             }
@@ -75,7 +75,7 @@ ajtxz_hcgame.game = (function() {
 
             //_pGame.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
             _pGame.state.add('boot', new ajtxz_hcgame.bootState);
-            _pGame.state.add('preloader',new ajtxz_hcgame.Preloader);
+            _pGame.state.add('preloader', new ajtxz_hcgame.Preloader);
             _pGame.state.add('lvl1_1', new ajtxz_hcgame.level1_1);
             _pGame.state.start('boot');
 
@@ -85,7 +85,7 @@ ajtxz_hcgame.game = (function() {
     };
 
     return game;
-}());
+}();
 
 
 
