@@ -139,6 +139,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
         crank = game.addAsset(90, 609, 'crank');
         crank.scale.setTo(0.7,0.7);
         crank.anchor.setTo(0.48,0.48);
+        crank.inputEnabled = true;
+        crank.input.useHandCursor = true;
 
         crank.inputEnabled = true;
         crank.events.onInputDown.add(function(){down = true;});
@@ -174,7 +176,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
             crank.rotation = (angle % 90);
             game.captain.rotation = angle;
         }
-        cannon_body.angle = crank.angle;
+        cannon_body.angle = crank.angle/5;
 
 
     }
