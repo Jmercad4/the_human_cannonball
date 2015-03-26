@@ -5,12 +5,17 @@
  * @param pgame current phaser game instance
  */
 ajtxz_hcgame.levelbase = function (pgame) {
-    var game = ajtxz_hcgame.game;
+    //Constants
+    var SLIDER_X_POS = 300;
+    var SLIDER_Y_POS = 575;
+    var MAX_VELOCITY = 1000; //NEED TO FIND BEST VALUE
 
+    //Game
+    var game = ajtxz_hcgame.game;
     var options = game.options;
 
-    // Obstacle variable
-    var bird;
+    //Global Game Components
+    var bird, slider_button, slider_box;
 
     function collide_obstacles(){
         // Handle collision with obstacles
@@ -72,6 +77,14 @@ ajtxz_hcgame.levelbase = function (pgame) {
         });
     };
 
+    //Returns velocity with respect to current gunpowder level
+    function getVelocity()
+    {
+        var x_position = slider_button.x - slider_box.x; //Determine x position of slider button within box
+        var percentage = x_position / (slider_box.width - slider_button.width); //Determine percentage of gunpowder bar filled
+        return percentage * MAX_VELOCITY; //Determine velocity
+    }
+
     function drawBackgrounds () {
 
         game.addAsset(0, 0, 'level_background');
@@ -81,26 +94,31 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         game.controlBoard = g.create(0, pgame.world.height - 110, 'control_board');
         game.controlBoard.body.immovable = true;
-
-
-        pgame.add.button(660, 565, 'fire_button', function() {
-            game.captain.body.gravity.y = 800;
-            game.captain.body.velocity.setTo(500, -800);
-
-        }).scale.setTo(0.70, 0.70);
     }
 
 
     function initControls()
     {
-        var slider_box = game.addAsset(300, 575, 'slider_box');
-        var slider_button = game.addAsset(300, 575, 'slider_button');
-
+        ////Initialize Gunpowder Slider////
+        slider_box = game.addAsset(SLIDER_X_POS, SLIDER_Y_POS, 'slider_box'); //Load slider button
+        slider_button = game.addAsset(SLIDER_X_POS, SLIDER_Y_POS+5, 'slider_button'); //Load slider box
+        //Set up input handler
         slider_button.inputEnabled = true;
         slider_button.input.enableDrag(false);
         slider_button.input.allowVerticalDrag = false;
         slider_button.input.useHandCursor = true;
         slider_button.input.boundsSprite = slider_box;
+
+        ////Initialize Fire Button////
+        pgame.add.button(660, 565, 'fire_button', function() {
+            game.captain.body.gravity.y = 800;
+
+            //Velocity determined by current slider and wheel positions
+            var velocity = getVelocity();
+            new Phaser.Text(game, 300,300,velocity);
+            //Need rotation angle to get velocity_x and velocity_y values from velocity
+            game.captain.body.velocity.setTo(velocity, -velocity);
+        }).scale.setTo(0.70, 0.70);
 
     }
 
