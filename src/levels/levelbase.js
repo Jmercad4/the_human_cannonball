@@ -136,9 +136,9 @@ ajtxz_hcgame.levelbase = function (pgame) {
         }).scale.setTo(0.70, 0.70);
 
 
-        //Crank for angle
+        ////Initialize Angle Crank////
         crank = game.addAsset(90, 609, 'crank');
-        crank.scale.setTo(0.7,0.7);
+        crank.scale.setTo(0.8,0.8);
         crank.anchor.setTo(0.48,0.48);
 
         crank.inputEnabled = true;
