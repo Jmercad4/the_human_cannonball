@@ -30,7 +30,10 @@ ajtxz_hcgame.Preloader = function(){
         game.loadAsset('control_board', 'control_board.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('fire_button', 'fireButton.png', ajtxz_hcgame.AssetType.IMAGE);
         this.load.spritesheet('bird', './assets/images/bird.png', 31, 32);
-        this.load.spritesheet('waterjet', './assets/images/waterjet.png', 105, 278);
+        this.load.spritesheet('waterjet1', './assets/images/waterjet1.png', 98, 200);
+        game.loadAsset('crank', 'crank.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('pool', 'pool.png', ajtxz_hcgame.AssetType.IMAGE);
+        //this.load.spritesheet('crank', './assets/images/crank.png',149, 137);
     };
 
     this.create= function () {

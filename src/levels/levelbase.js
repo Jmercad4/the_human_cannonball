@@ -11,6 +11,10 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
     // Obstacle variable
     var bird;
+    var crank;
+    var cannon_body;
+    var captain;
+    var pool;
 
     function collide_obstacles(){
         // Handle collision with obstacles
@@ -24,10 +28,14 @@ ajtxz_hcgame.levelbase = function (pgame) {
             cs_x = 20,
             cs_y = (options.height * 0.7) + 10;
 
-        game.captain = game.addAsset(cb_x + 70, cb_y - 10, 'captain');
+        game.captain = game.addAsset(cb_x + 86, cb_y + 88, 'captain');
+        captain = game.captain;
+        captain.anchor.setTo(0.28, 0.78);
 
-        var cannon_body = game.addAsset(cb_x + 40, cb_y + 20, 'cannon_body')
-            .scale.setTo(0.5, 0.5);
+        cannon_body = game.addAsset(cb_x + 72, cb_y + 93, 'cannon_body');
+
+        cannon_body.scale.setTo(0.5, 0.5);
+        cannon_body.anchor.setTo(0.3,0.8);
 
         var cannon_stand = game.addAsset(cs_x + 40, cs_y + 20, 'cannon_stand')
             .scale.setTo(0.5, 0.5);
@@ -46,7 +54,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
         bird.animations.add('right', [5,6,7,8,9], 10, true);
 
         // Add water jet
-        var waterjet = game.obstacles.create(pgame.world.centerX-100, 210, 'waterjet');
+        var waterjet = game.obstacles.create(400, 290, 'waterjet1');
+        waterjet.scale.setTo(1,1);
         waterjet.immovable = true;
         waterjet.animations.add('shooting', [0,1], 2, true);
         waterjet.animations.play('shooting');
@@ -72,6 +81,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
         });
     };
 
+    var down = false;
     function drawBackgrounds () {
 
         game.addAsset(0, 0, 'level_background');
@@ -88,6 +98,17 @@ ajtxz_hcgame.levelbase = function (pgame) {
             game.captain.body.velocity.setTo(500, -800);
 
         }).scale.setTo(0.70, 0.70);
+
+        //Crank for angle
+        crank = game.addAsset(90, 543, 'crank');
+        crank.scale.setTo(0.7,0.7);
+        crank.anchor.setTo(0.48,0.48);
+
+        crank.inputEnabled = true;
+        crank.events.onInputDown.add(function(){down = true;});
+
+        pool = game.addAsset(590, 330, 'pool');
+        pool.scale.setTo(0.7,0.7);
     }
 
     this.init = function() {
@@ -104,6 +125,20 @@ ajtxz_hcgame.levelbase = function (pgame) {
     this.defaultUpdate = function() {
         pgame.physics.arcade.collide(game.captain, game.controlBoard);
         pgame.physics.arcade.collide(game.captain, game.obstacles, collide_obstacles);
+
+        //CRANK FUNCTIONALITY
+        var click = pgame.input.activePointer;
+        if(!click.isDown){
+            down = false;
+        }
+        else if(down){
+            var angle = Phaser.Math.angleBetween(crank.x,crank.y,click.x, click.y);
+            crank.rotation = (angle % 90);
+            game.captain.rotation = angle;
+        }
+        cannon_body.angle = crank.angle;
+
+
     }
 
 };
