@@ -39,7 +39,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
         captain = game.captain;
         captain.anchor.setTo(0.28, 0.78);
 
-        cannon_body = game.addAsset(cb_x + 72, cb_y + 93, 'cannon_body');
+        cannon_body = game.addAsset(cb_x + 73, cb_y + 100, 'cannon_body');
 
         cannon_body.scale.setTo(0.5, 0.5);
         cannon_body.anchor.setTo(0.3,0.8);
@@ -136,7 +136,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
 
         //Crank for angle
-        crank = game.addAsset(90, 543, 'crank');
+        crank = game.addAsset(90, 609, 'crank');
         crank.scale.setTo(0.7,0.7);
         crank.anchor.setTo(0.48,0.48);
 
