@@ -166,7 +166,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         //CRANK FUNCTIONALITY
         var click = pgame.input.activePointer;
-        else if(click.isDown){
+        if(click.isDown){
             var angle = Phaser.Math.angleBetween(crank.x,crank.y,click.x, click.y);
             crank.rotation = angle;
             game.captain.rotation = angle;
