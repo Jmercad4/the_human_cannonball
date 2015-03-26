@@ -93,12 +93,14 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
     function initControls()
     {
-        var slider_button = game.addAsset(200, 200, 'slider_button');
+        var slider_box = game.addAsset(300, 575, 'slider_box');
+        var slider_button = game.addAsset(300, 575, 'slider_button');
 
         slider_button.inputEnabled = true;
         slider_button.input.enableDrag(false);
         slider_button.input.allowVerticalDrag = false;
         slider_button.input.useHandCursor = true;
+        slider_button.input.boundsSprite = slider_box;
 
     }
 
