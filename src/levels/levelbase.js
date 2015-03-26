@@ -21,7 +21,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
     var pool;
 
     //Global Game Components
-    var bird, slider_button, slider_box;
+    var bird, slider_button, slider_box, slider_bar;
 
     function collide_obstacles(){
         // Handle collision with obstacles
@@ -61,7 +61,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
         bird.animations.add('right', [5,6,7,8,9], 10, true);
 
         // Add water jet
-        var waterjet = game.obstacles.create(400, 290, 'waterjet1');
+        var waterjet = game.obstacles.create(400, 290, 'waterjet');
         waterjet.scale.setTo(1,1);
         waterjet.immovable = true;
         waterjet.animations.add('shooting', [0,1], 2, true);
@@ -115,6 +115,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
     {
         ////Initialize Gunpowder Slider////
         slider_box = game.addAsset(SLIDER_X_POS, SLIDER_Y_POS, 'slider_box'); //Load slider button
+        slider_bar = game.addAsset(SLIDER_X_POS+13, SLIDER_Y_POS+20, 'slider_bar'); //Load slider button
         slider_button = game.addAsset(SLIDER_X_POS, SLIDER_Y_POS+5, 'slider_button'); //Load slider box
         //Set up input handler
         slider_button.inputEnabled = true;
@@ -163,6 +164,10 @@ ajtxz_hcgame.levelbase = function (pgame) {
     this.defaultUpdate = function() {
         pgame.physics.arcade.collide(game.captain, game.controlBoard);
         pgame.physics.arcade.collide(game.captain, game.obstacles, collide_obstacles);
+
+        //Stretch slider bar with slider button
+        if (slider_button.input.pointerDragged())
+            slider_bar.width = slider_button.x - slider_box.x;
 
         //CRANK FUNCTIONALITY
         var click = pgame.input.activePointer;
