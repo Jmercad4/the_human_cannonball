@@ -90,10 +90,23 @@ ajtxz_hcgame.levelbase = function (pgame) {
         }).scale.setTo(0.70, 0.70);
     }
 
+
+    function initControls()
+    {
+        var slider_button = game.addAsset(200, 200, 'slider_button');
+
+        slider_button.inputEnabled = true;
+        slider_button.input.enableDrag(false);
+        slider_button.input.allowVerticalDrag = false;
+        slider_button.input.useHandCursor = true;
+
+    }
+
     this.init = function() {
         drawBackgrounds();
         drawCannon_captain();
         drawObstacles();
+        initControls();
 
         pgame.physics.arcade.enable(game.captain);
         game.captain.body.collideWorldBounds = true;
