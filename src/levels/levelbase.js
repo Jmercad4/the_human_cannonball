@@ -15,7 +15,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
     var options = game.options;
 
     // Obstacle variable
-    var crank;
+    var crank, crank_knob;
     var cannon_body;
     var captain;
     var pool;
@@ -53,6 +53,10 @@ ajtxz_hcgame.levelbase = function (pgame) {
         game.obstacles = pgame.add.group();
         game.obstacles.enableBody = true;
 
+        // Add pool
+        pool = game.addAsset(590, 330, 'pool');
+        pool.scale.setTo(0.7,0.7);
+
         // Add bird
         bird = game.obstacles.create(pgame.world.centerX, 300, 'bird');
 
@@ -88,9 +92,6 @@ ajtxz_hcgame.levelbase = function (pgame) {
         });
     };
 
-
-    var down = false;
-
     //Returns velocity with respect to current gunpowder level
     function getVelocity()
     {
@@ -113,6 +114,19 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
     function initControls()
     {
+        ////Initialize Angle Crank////
+        crank = game.addAsset(90, 609, 'crank');
+        crank_knob = game.addAsset(crank.x, crank.y, 'crank_knob');
+
+        crank.scale.setTo(0.8, 0.8);
+        crank.anchor.setTo(0.5, 0.5);
+
+        crank_knob.scale.setTo(0.8, 0.8);
+        crank_knob.anchor.setTo(0.5, 0.5);
+        crank_knob.pivot = new PIXI.Point(-49g, -1);
+        crank_knob.inputEnabled = true;
+        crank_knob.input.useHandCursor = true;
+
         ////Initialize Gunpowder Slider////
         slider_box = game.addAsset(SLIDER_X_POS, SLIDER_Y_POS, 'slider_box'); //Load slider button
         slider_bar = game.addAsset(SLIDER_X_POS+13, SLIDER_Y_POS+20, 'slider_bar'); //Load slider button
@@ -134,28 +148,13 @@ ajtxz_hcgame.levelbase = function (pgame) {
             //Need rotation angle to get velocity_x and velocity_y values from velocity
             game.captain.body.velocity.setTo(velocity, -velocity);
         }).scale.setTo(0.70, 0.70);
-
-
-        ////Initialize Angle Crank////
-        crank = game.addAsset(90, 609, 'crank');
-        crank.scale.setTo(0.8,0.8);
-        crank.anchor.setTo(0.50,0.50);
-        crank.inputEnabled = true;
-        crank.input.useHandCursor = true;
-
-        crank.inputEnabled = true;
-        crank.events.onInputDown.add(function(){down = true;});
-
-        pool = game.addAsset(590, 330, 'pool');
-        pool.scale.setTo(0.7,0.7);
-
     }
 
     this.init = function() {
         drawBackgrounds();
+        initControls();
         drawCannon_captain();
         drawObstacles();
-        initControls();
 
         pgame.physics.arcade.enable(game.captain);
         game.captain.body.collideWorldBounds = true;
@@ -173,12 +172,15 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         //CRANK FUNCTIONALITY
         var click = pgame.input.activePointer;
-        if(click.isDown){
-            var angle = Phaser.Math.angleBetween(crank.x,crank.y,click.x, click.y);
+        if (crank_knob.input.checkPointerDown(click))
+        {
+            var angle = Phaser.Math.angleBetween(crank.x, crank.y, click.x, click.y);
+            crank_knob.rotation = angle;
             crank.rotation = angle;
-            game.captain.rotation = angle;
-            cannon_body.angle = crank.angle/4;
+            //game.captain.rotation = angle;
+            cannon_body.angle = crank.angle / 4;
         }
+
         //cannon_body.angle = crank.angle/5;
         //if (cannon_body.angle < 90 && cannon_body.angle > 0)
 

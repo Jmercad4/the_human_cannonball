@@ -35,6 +35,7 @@ ajtxz_hcgame.Preloader = function(){
         this.load.spritesheet('bird', './assets/images/bird.png', 27, 32);
         this.load.spritesheet('waterjet', './assets/images/waterjet.png', 98, 200);
         game.loadAsset('crank', 'crank.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('crank_knob', 'crank_knob.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('pool', 'pool.png', ajtxz_hcgame.AssetType.IMAGE);
         //this.load.spritesheet('crank', './assets/images/crank.png',149, 137);
     };
