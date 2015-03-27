@@ -123,7 +123,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         crank_knob.scale.setTo(0.8, 0.8);
         crank_knob.anchor.setTo(0.5, 0.5);
-        crank_knob.pivot = new PIXI.Point(-49g, -1);
+        crank_knob.pivot = new PIXI.Point(-49, -1);
         crank_knob.inputEnabled = true;
         crank_knob.input.useHandCursor = true;
 
@@ -172,7 +172,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         //CRANK FUNCTIONALITY
         var click = pgame.input.activePointer;
-        if (crank_knob.input.checkPointerDown(click))
+        if (crank_knob.input.pointerDown())
         {
             var angle = Phaser.Math.angleBetween(crank.x, crank.y, click.x, click.y);
             crank_knob.rotation = angle;
