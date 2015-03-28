@@ -6,7 +6,7 @@
  */
 ajtxz_hcgame.levelbase = function (pgame) {
     //Constants
-    var SLIDER_X_POS = 300;
+    var SLIDER_X_POS = 230;
     var SLIDER_Y_POS = 575;
     var CANNON_DEFAULT = -Math.PI/10.0; //45 degrees
     var CAPTAIN_DEFAULT = Math.PI/4.0; //45 degrees
