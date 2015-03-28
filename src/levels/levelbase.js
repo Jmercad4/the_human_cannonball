@@ -20,7 +20,6 @@ ajtxz_hcgame.levelbase = function (pgame) {
     var cannon_body;
     var captain;
     var pool;
-    game.obstacles = pgame.add.group();
 
     //Global Game Components
     var bird, slider_button, slider_box, slider_bar;
@@ -50,6 +49,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
     }
 
     function drawObstacles(){
+        game.obstacles = pgame.add.group();
         game.obstacles.enableBody = true;
 
         // Add pool
