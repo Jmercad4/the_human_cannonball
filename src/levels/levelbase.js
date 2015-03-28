@@ -35,9 +35,9 @@ ajtxz_hcgame.levelbase = function (pgame) {
         var cb_x = 80, cb_y = 506;
         var cs_x = cb_x - 14, cs_y = cb_y - 6;
 
-        captain = game.addAsset(cb_x - 8, cb_y - 8, 'captain');
+        captain = game.addAsset(cb_x-3, cb_y-5, 'captain');
         captain.rotation = CAPTAIN_DEFAULT;
-        captain.pivot = new PIXI.Point(10.5, 61);
+        captain.pivot = new PIXI.Point(16, 61);
         captain.animations.add('flying', [0,1,2,3,4,5,6,7], 5, true);
         captain.animations.play('flying');
 

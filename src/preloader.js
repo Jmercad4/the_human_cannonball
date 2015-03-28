@@ -37,7 +37,6 @@ ajtxz_hcgame.Preloader = function(){
         game.loadAsset('crank', 'crank.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('crank_knob', 'crank_knob.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('pool', 'pool.png', ajtxz_hcgame.AssetType.IMAGE);
-        //this.load.spritesheet('crank', './assets/images/crank.png',149, 137);
     };
 
     this.create= function () {
