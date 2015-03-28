@@ -35,7 +35,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
         var cb_x = 80, cb_y = 506;
         var cs_x = cb_x - 14, cs_y = cb_y - 6;
 
-        captain = game.addAsset(cb_x-3, cb_y-5, 'captain');
+        captain = game.addAsset(cb_x - 3, cb_y - 5, 'captain');
         captain.rotation = CAPTAIN_DEFAULT;
         captain.pivot = new PIXI.Point(16, 61);
         captain.animations.add('flying', [0,1,2,3,4,5,6,7], 5, true);
@@ -45,8 +45,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
         cannon_body.anchor.setTo(0.42, 0.70);
         cannon_body.rotation = CANNON_DEFAULT;
 
-        game.addAsset(cs_x, cs_y, 'cannon_stand')
-
+        game.addAsset(cs_x, cs_y, 'cannon_stand');
     }
 
     function drawObstacles(){

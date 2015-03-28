@@ -25,7 +25,7 @@ ajtxz_hcgame.Preloader = function(){
         // Load all assets for entire game
         game.loadAsset('cannon_body', 'cannon_body.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('cannon_stand', 'cannon_stand.png', ajtxz_hcgame.AssetType.IMAGE);
-        this.load.spritesheet('captain', './assets/images/captain.png', 25, 61);
+        this.load.spritesheet('captain', './assets/images/captain.png', 26, 61);
         game.loadAsset('level_background', 'level_background.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('control_board', 'control_board.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('fire_button', 'fireButton.png', ajtxz_hcgame.AssetType.IMAGE);
