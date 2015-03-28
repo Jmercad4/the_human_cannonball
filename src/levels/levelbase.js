@@ -174,10 +174,10 @@ ajtxz_hcgame.levelbase = function (pgame) {
             slider_bar.width = slider_button.x - slider_box.x;
 
         //Crank Functionality
-        var click = pgame.input.activePointer;
         var current_angle = Phaser.Math.ceilTo(cannon_body.angle);
-        if (crank_knob.input.checkPointerDown(click))
+        if (crank_knob.input.pointerDown())
         {
+            var click = pgame.input.activePointer;
             var angle = Phaser.Math.angleBetween(crank.x, crank.y, click.x, click.y);
 
             if ((current_angle != -89 || angle < 0) && (current_angle != 0 || angle > 0))
