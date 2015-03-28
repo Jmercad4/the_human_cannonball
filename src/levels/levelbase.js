@@ -9,6 +9,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
     var SLIDER_X_POS = 300;
     var SLIDER_Y_POS = 575;
     var CANNON_DEFAULT = -Math.PI/10.0; //45 degrees
+    var CAPTAIN_DEFAULT = Math.PI/4.0; //45 degrees
     var MAX_VELOCITY = 1000; //NEED TO FIND BEST VALUE
 
     //Game
@@ -34,10 +35,10 @@ ajtxz_hcgame.levelbase = function (pgame) {
         var cb_x = 80, cb_y = 506;
         var cs_x = cb_x - 14, cs_y = cb_y - 6;
 
-        game.captain = game.addAsset(cb_x + 86, cb_y + 88, 'captain');
-        captain = game.captain;
-        captain.anchor.setTo(0.28, 0.78);
-        captain.animations.add('flying', [0,1,2,3,4,5,6,7], 4, true);
+        captain = game.addAsset(cb_x - 8, cb_y - 8, 'captain');
+        captain.rotation = CAPTAIN_DEFAULT;
+        captain.pivot = new PIXI.Point(10.5, 61);
+        captain.animations.add('flying', [0,1,2,3,4,5,6,7], 5, true);
         captain.animations.play('flying');
 
         cannon_body = game.addAsset(cb_x, cb_y, 'cannon_body');
@@ -139,13 +140,13 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         ////Initialize Fire Button////
         pgame.add.button(660, 565, 'fire_button', function() {
-            game.captain.body.gravity.y = 800;
+            captain.body.gravity.y = 800;
 
             //Velocity determined by current slider and wheel positions
             var velocity = getVelocity();
             new Phaser.Text(game, 300,300,velocity);
             //Need rotation angle to get velocity_x and velocity_y values from velocity
-            game.captain.body.velocity.setTo(velocity, -velocity);
+            captain.body.velocity.setTo(velocity, -velocity);
         }).scale.setTo(0.70, 0.70);
     }
 
@@ -155,17 +156,17 @@ ajtxz_hcgame.levelbase = function (pgame) {
         drawCannon_captain();
         drawObstacles();
 
-        pgame.physics.arcade.enable(game.captain);
-        game.captain.body.collideWorldBounds = true;
-        game.captain.body.bounce.y = 0.3;
+        pgame.physics.arcade.enable(captain);
+        captain.body.collideWorldBounds = true;
+        captain.body.bounce.y = 0.3;
 
     };
 
     this.defaultUpdate = function()
     {
         //////Determine collisions//////
-        pgame.physics.arcade.collide(game.captain, game.controlBoard);
-        pgame.physics.arcade.collide(game.captain, game.obstacles, collide_obstacles);
+        pgame.physics.arcade.collide(captain, game.controlBoard);
+        pgame.physics.arcade.collide(captain, game.obstacles, collide_obstacles);
 
         /////Slider Functionality///////
         //If slider button is being dragged, fill slider box with bar
@@ -186,7 +187,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
             if ((current_angle != -62 || angle < 0) && (current_angle != 27 || angle > 0))
             {
                 crank_knob.rotation = crank.rotation = angle;
-                //game.captain.rotation = angle;
+                captain.rotation = CAPTAIN_DEFAULT + angle / 4;
                 cannon_body.rotation = CANNON_DEFAULT + angle / 4; //cannon max is 90, min is 0
             }
         }
