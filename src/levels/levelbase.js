@@ -17,7 +17,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
     var options = game.options;
 
     // Obstacle variable
-    var crank, crank_knob;
+    var crank, crank_knob, crank_noise_sfx;
     var cannon_body;
     var captain;
     var pool;
@@ -126,6 +126,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
         crank_knob.inputEnabled = true;
         crank_knob.input.useHandCursor = true;
 
+        crank_noise_sfx = pgame.add.audio('crank_noise');
+
         ////Initialize Gunpowder Slider////
         slider_box = game.addAsset(SLIDER_X_POS, SLIDER_Y_POS, 'slider_box'); //Load slider button
         slider_bar = game.addAsset(SLIDER_X_POS+13, SLIDER_Y_POS+20, 'slider_bar'); //Load slider button
@@ -147,8 +149,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
             captain.body.velocity.setTo(velocity, -velocity);
         }, this, null, null, 1, 0);
         fire_button.input.useHandCursor = true;
-        var button_click = pgame.add.audio('button_click');
-        fire_button.setDownSound(button_click);
+        var button_click_sfx = pgame.add.audio('button_click');
+        fire_button.setDownSound(button_click_sfx);
     }
 
     this.init = function() {
@@ -176,7 +178,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         /////Crank Functionality//////
         var current_angle = Phaser.Math.ceilTo(cannon_body.angle); //Current angle of cannon body
-        console.log('current angle : '+current_angle);
+        var previous_crank_angle = crank.rotation; //Angle of crank prior to change
         //If crank knob is being selected, determine rotations
         if (crank_knob.input.pointerDown())
         {
@@ -184,12 +186,15 @@ ajtxz_hcgame.levelbase = function (pgame) {
             var click = pgame.input.activePointer;
             var angle = Phaser.Math.angleBetween(crank.x, crank.y, click.x, click.y);
 
-            //Rotate crank and cannon accordingly. Block if 90 or 0 degrees is reached
-            if ((current_angle != -62 || angle < 0) && (current_angle != 27 || angle > 0))
+            //Rotate crank and cannon accordingly. Block if 90 or 0 degrees is reached. Do nothing is no change in angleg
+            if ((angle != previous_crank_angle) && (current_angle != -62 || angle < 0) && (current_angle != 27 || angle > 0))
             {
                 crank_knob.rotation = crank.rotation = angle;
                 captain.rotation = CAPTAIN_DEFAULT + angle / 4;
                 cannon_body.rotation = CANNON_DEFAULT + angle / 4; //cannon max is 90, min is 0
+
+                //Play crank sound effect
+                crank_noise_sfx.play('', 0, 1, false, false);
             }
         }
 

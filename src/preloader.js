@@ -41,6 +41,7 @@ ajtxz_hcgame.Preloader = function(){
 
         //Load Sound Effects & Music
         this.load.audio('button_click', './assets/sfx/button_click.m4a');
+        this.load.audio('crank_noise', './assets/sfx/crank_noise.m4a');
     };
 
     this.create= function () {
