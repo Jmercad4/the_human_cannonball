@@ -121,7 +121,6 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         crank.scale.setTo(0.8, 0.8);
         crank.anchor.setTo(0.5, 0.5);
-        crank.blocked = false;
 
         crank_knob.scale.setTo(0.8, 0.8);
         crank_knob.anchor.setTo(0.5, 0.5);
@@ -166,25 +165,30 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
     this.defaultUpdate = function()
     {
+        //////Determine collisions//////
         pgame.physics.arcade.collide(game.captain, game.controlBoard);
         pgame.physics.arcade.collide(game.captain, game.obstacles, collide_obstacles);
 
-        //Stretch slider bar with slider button
+        /////Slider Functionality///////
+        //If slider button is being dragged, fill slider box with bar
         if (slider_button.input.pointerDragged())
             slider_bar.width = slider_button.x - slider_box.x;
 
-        //Crank Functionality
-        var current_angle = Phaser.Math.ceilTo(cannon_body.angle);
+        /////Crank Functionality//////
+        var current_angle = Phaser.Math.ceilTo(cannon_body.angle); //Current angle of cannon body
+        //If crank knob is being selected, determine rotations
         if (crank_knob.input.pointerDown())
         {
+            //Find angle between crank knob and crank center
             var click = pgame.input.activePointer;
             var angle = Phaser.Math.angleBetween(crank.x, crank.y, click.x, click.y);
 
+            //Rotate crank and cannon accordingly. Block if 90 or 0 degrees is reached
             if ((current_angle != -89 || angle < 0) && (current_angle != 0 || angle > 0))
             {
                 crank_knob.rotation = crank.rotation = angle;
                 //game.captain.rotation = angle;
-                cannon_body.rotation = CANNON_DEFAULT + angle / 4;
+                cannon_body.rotation = CANNON_DEFAULT + angle / 4; //cannon max is 90, min is 0
             }
         }
 
