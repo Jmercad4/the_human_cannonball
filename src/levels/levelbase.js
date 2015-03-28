@@ -147,6 +147,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
             captain.body.velocity.setTo(velocity, -velocity);
         }, this, null, null, 1, 0);
         fire_button.input.useHandCursor = true;
+        var button_click = pgame.add.audio('button_click');
+        fire_button.setDownSound(button_click);
     }
 
     this.init = function() {
