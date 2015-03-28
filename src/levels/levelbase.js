@@ -174,12 +174,13 @@ ajtxz_hcgame.levelbase = function (pgame) {
             slider_bar.width = slider_button.x - slider_box.x;
 
         //Crank Functionality
+        var current_angle = Phaser.Math.ceilTo(cannon_body.angle);
         if (crank_knob.input.pointerDown())
         {
             var click = pgame.input.activePointer;
             var angle = Phaser.Math.angleBetween(crank.x, crank.y, click.x, click.y);
 
-            if (crank.blocked == false)
+            if ((current_angle != -89 || angle < 0 && angle > -178) && (current_angle != 0 || angle > 0 && angle < 179))
             {
                 crank_knob.rotation = crank.rotation = angle;
                 //game.captain.rotation = angle;
@@ -187,19 +188,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
             }
         }
 
-        var current_angle = Phaser.Math.ceilTo(cannon_body.angle);
-        if (current_angle == -89 || current_angle == 0)
-            crank.blocked = true;
-
-        if (crank.blocked && crank_knob.input.justReleased()) {
-            crank.blocked = false;
-            //Nudge crank backwards
-            crank_knob.rotation = crank.rotation = crank.rotation + Math.PI/180.0;
-            cannon_body.rotation += Math.PI/180.0;
-
-        }
-
-        console.log("crank blocked: " + crank.blocked);
+        /*console.log("crank blocked: " + crank.blocked);*/
 
 
 
