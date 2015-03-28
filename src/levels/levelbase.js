@@ -138,15 +138,15 @@ ajtxz_hcgame.levelbase = function (pgame) {
         slider_button.input.boundsSprite = slider_box;
 
         ////Initialize Fire Button////
-        pgame.add.button(660, 565, 'fire_button', function() {
+        var fire_button = pgame.add.button(640, 573, 'fire_button', function() {
             captain.body.gravity.y = 800;
-
             //Velocity determined by current slider and wheel positions
             var velocity = getVelocity();
             new Phaser.Text(game, 300,300,velocity);
             //Need rotation angle to get velocity_x and velocity_y values from velocity
             captain.body.velocity.setTo(velocity, -velocity);
-        }).scale.setTo(0.70, 0.70);
+        }, this, null, null, 1, 0);
+        fire_button.input.useHandCursor = true;
     }
 
     this.init = function() {

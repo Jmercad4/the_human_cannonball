@@ -28,7 +28,7 @@ ajtxz_hcgame.Preloader = function(){
         this.load.spritesheet('captain', './assets/images/captain.png', 26, 61);
         game.loadAsset('level_background', 'level_background.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('control_board', 'control_board.png', ajtxz_hcgame.AssetType.IMAGE);
-        game.loadAsset('fire_button', 'fireButton.png', ajtxz_hcgame.AssetType.IMAGE);
+        this.load.spritesheet('fire_button', './assets/images/fire_button.png', 120, 76);
         game.loadAsset('slider_box', 'slider_box.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('slider_bar', 'slider_bar.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('slider_button', 'slider_button.png', ajtxz_hcgame.AssetType.IMAGE);
