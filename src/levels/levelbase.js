@@ -8,6 +8,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
     //Constants
     var SLIDER_X_POS = 300;
     var SLIDER_Y_POS = 575;
+    var CANNON_DEFAULT = -Math.PI/4.0; //45 degrees
     var MAX_VELOCITY = 1000; //NEED TO FIND BEST VALUE
 
     //Game
@@ -39,10 +40,10 @@ ajtxz_hcgame.levelbase = function (pgame) {
         captain = game.captain;
         captain.anchor.setTo(0.28, 0.78);
 
-        cannon_body = game.addAsset(cb_x + 73, cb_y + 100, 'cannon_body');
-
+        cannon_body = game.addAsset(cb_x + 85, cb_y + 105, 'cannon_body');
         cannon_body.scale.setTo(0.5, 0.5);
         cannon_body.anchor.setTo(0.3,0.8);
+        cannon_body.rotation = CANNON_DEFAULT;
 
         var cannon_stand = game.addAsset(cs_x + 40, cs_y + 20, 'cannon_stand')
             .scale.setTo(0.5, 0.5);
@@ -120,6 +121,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         crank.scale.setTo(0.8, 0.8);
         crank.anchor.setTo(0.5, 0.5);
+        crank.blocked = false;
 
         crank_knob.scale.setTo(0.8, 0.8);
         crank_knob.anchor.setTo(0.5, 0.5);
@@ -162,7 +164,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
     };
 
-    this.defaultUpdate = function() {
+    this.defaultUpdate = function()
+    {
         pgame.physics.arcade.collide(game.captain, game.controlBoard);
         pgame.physics.arcade.collide(game.captain, game.obstacles, collide_obstacles);
 
@@ -170,19 +173,33 @@ ajtxz_hcgame.levelbase = function (pgame) {
         if (slider_button.input.pointerDragged())
             slider_bar.width = slider_button.x - slider_box.x;
 
-        //CRANK FUNCTIONALITY
-        var click = pgame.input.activePointer;
+        //Crank Functionality
         if (crank_knob.input.pointerDown())
         {
+            var click = pgame.input.activePointer;
             var angle = Phaser.Math.angleBetween(crank.x, crank.y, click.x, click.y);
-            crank_knob.rotation = angle;
-            crank.rotation = angle;
-            //game.captain.rotation = angle;
-            cannon_body.angle = crank.angle / 4;
+
+            if (crank.blocked == false)
+            {
+                crank_knob.rotation = crank.rotation = angle;
+                //game.captain.rotation = angle;
+                cannon_body.rotation = CANNON_DEFAULT + angle / 4;
+            }
         }
 
-        //cannon_body.angle = crank.angle/5;
-        //if (cannon_body.angle < 90 && cannon_body.angle > 0)
+        var current_angle = Phaser.Math.ceilTo(cannon_body.angle);
+        if (current_angle == -89 || current_angle == 0)
+            crank.blocked = true;
+
+        if (crank.blocked && crank_knob.input.justReleased()) {
+            crank.blocked = false;
+            //Nudge crank backwards
+            crank_knob.rotation = crank.rotation = crank.rotation + Math.PI/180.0;
+            cannon_body.rotation += Math.PI/180.0;
+
+        }
+
+        console.log("crank blocked: " + crank.blocked);
 
 
 
