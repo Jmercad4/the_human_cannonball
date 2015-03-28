@@ -39,6 +39,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
         game.captain = game.addAsset(cb_x + 86, cb_y + 88, 'captain');
         captain = game.captain;
         captain.anchor.setTo(0.28, 0.78);
+        captain.animations.add('flying', [0,1,2,3,4,5,6,7], 4, true);
+        captain.animations.play('flying');
 
         cannon_body = game.addAsset(cb_x + 85, cb_y + 105, 'cannon_body');
         cannon_body.scale.setTo(0.5, 0.5);
