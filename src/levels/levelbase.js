@@ -31,8 +31,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
     function drawCannon_captain() {
 
-        var cb_x = 64, cb_y = 508;
-        var cs_x = 50, cs_y = 500;
+        var cb_x = 80, cb_y = 506;
+        var cs_x = cb_x - 14, cs_y = cb_y - 6;
 
         game.captain = game.addAsset(cb_x + 86, cb_y + 88, 'captain');
         captain = game.captain;
@@ -41,7 +41,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
         captain.animations.play('flying');
 
         cannon_body = game.addAsset(cb_x, cb_y, 'cannon_body');
-        cannon_body.anchor.setTo(0.42, 0.74);
+        cannon_body.anchor.setTo(0.42, 0.70);
         cannon_body.rotation = CANNON_DEFAULT;
 
         game.addAsset(cs_x, cs_y, 'cannon_stand')
@@ -174,6 +174,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         /////Crank Functionality//////
         var current_angle = Phaser.Math.ceilTo(cannon_body.angle); //Current angle of cannon body
+        console.log('current angle : '+current_angle);
         //If crank knob is being selected, determine rotations
         if (crank_knob.input.pointerDown())
         {
@@ -182,7 +183,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
             var angle = Phaser.Math.angleBetween(crank.x, crank.y, click.x, click.y);
 
             //Rotate crank and cannon accordingly. Block if 90 or 0 degrees is reached
-            if ((current_angle != -89 || angle < 0) && (current_angle != 0 || angle > 0))
+            if ((current_angle != -62 || angle < 0) && (current_angle != 27 || angle > 0))
             {
                 crank_knob.rotation = crank.rotation = angle;
                 //game.captain.rotation = angle;
