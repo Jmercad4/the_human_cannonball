@@ -8,7 +8,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
     //Constants
     var SLIDER_X_POS = 300;
     var SLIDER_Y_POS = 575;
-    var CANNON_DEFAULT = -Math.PI/4.0; //45 degrees
+    var CANNON_DEFAULT = -Math.PI/10.0; //45 degrees
     var MAX_VELOCITY = 1000; //NEED TO FIND BEST VALUE
 
     //Game
@@ -20,6 +20,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
     var cannon_body;
     var captain;
     var pool;
+    game.obstacles = pgame.add.group();
 
     //Global Game Components
     var bird, slider_button, slider_box, slider_bar;
@@ -31,10 +32,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
     function drawCannon_captain() {
 
-        var cb_x = 10,
-            cb_y = (options.height * 0.6),
-            cs_x = 20,
-            cs_y = (options.height * 0.7) + 10;
+        var cb_x = 64, cb_y = 508;
+        var cs_x = 50, cs_y = 500;
 
         game.captain = game.addAsset(cb_x + 86, cb_y + 88, 'captain');
         captain = game.captain;
@@ -42,18 +41,15 @@ ajtxz_hcgame.levelbase = function (pgame) {
         captain.animations.add('flying', [0,1,2,3,4,5,6,7], 4, true);
         captain.animations.play('flying');
 
-        cannon_body = game.addAsset(cb_x + 85, cb_y + 105, 'cannon_body');
-        cannon_body.scale.setTo(0.5, 0.5);
-        cannon_body.anchor.setTo(0.3,0.8);
+        cannon_body = game.addAsset(cb_x, cb_y, 'cannon_body');
+        cannon_body.anchor.setTo(0.42, 0.74);
         cannon_body.rotation = CANNON_DEFAULT;
 
-        var cannon_stand = game.addAsset(cs_x + 40, cs_y + 20, 'cannon_stand')
-            .scale.setTo(0.5, 0.5);
+        game.addAsset(cs_x, cs_y, 'cannon_stand')
 
     }
 
     function drawObstacles(){
-        game.obstacles = pgame.add.group();
         game.obstacles.enableBody = true;
 
         // Add pool
