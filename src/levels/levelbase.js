@@ -70,7 +70,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
         // Add water jet
         var waterjet = game.obstacles.create(400, 290, 'waterjet');
         waterjet.scale.setTo(1,1);
-        waterjet.immovable = true;
+        waterjet.body.immovable = true;
         waterjet.animations.add('shooting', [0,1], 2, true);
         waterjet.animations.play('shooting');
 
