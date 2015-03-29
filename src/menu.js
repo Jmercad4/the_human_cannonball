@@ -60,7 +60,7 @@ ajtxz_hcgame.Menu = function () {
         // game.add.image(0, 0, 'menu_background');g
 
         // Use game_title.png
-        var title = pgame.add.image(pgame.world.centerX, pgame.world.centerY - 400, 'menu_title');
+        var title = pgame.add.image(pgame.world.centerX, pgame.world.centerY, 'menu_title');
         title.anchor.setTo(0.5, 0.5);
 
         // Use play_button.png
