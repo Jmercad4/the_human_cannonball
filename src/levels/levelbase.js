@@ -47,8 +47,16 @@ ajtxz_hcgame.levelbase = function (pgame) {
         else if (object2.key == 'waterjet' || object2.key == 'pool')
             SFX.crash_water.play('', 0, 1, false, false);
 
+        SFX.crowd_whisper.play('', 0, 0.2, false, false);
+
         captain.body.velocity = 0;
         captain.body.gravity.y = 0;
+
+        captain.visible = false;
+        captain.rotation = CAPTAIN_DEFAULT;
+        captain.x = cb_x - 3;
+        captain.y = cb_y - 5;
+        captain.visible = true;
 
         enableControls();
     }
@@ -205,7 +213,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         //Set up world physics
         pgame.physics.enable(captain, Phaser.Physics.ARCADE);
-        captain.body.setSize(5, 5, 10.5, 30.5);
+        captain.body.setSize(5, 5, 10.5, 30.5); //fix bounding box
         pgame.physics.enable(waterjet, Phaser.Physics.ARCADE);
         pgame.physics.enable(bird, Phaser.Physics.ARCADE);
         pgame.physics.enable(pool, Phaser.Physics.ARCADE);
