@@ -34,7 +34,7 @@ ajtxz_hcgame.Preloader = function(){
         game.loadAsset('slider_bar', 'slider_bar.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('slider_button', 'slider_button.png', ajtxz_hcgame.AssetType.IMAGE);
         this.load.spritesheet('bird', './assets/images/bird.png', 27, 32);
-        this.load.spritesheet('waterjet', './assets/images/waterjet.png',83,140);// 98, 200);
+        this.load.spritesheet('waterjet', './assets/images/waterjet.png',83,140);
         game.loadAsset('crank', 'crank.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('crank_knob', 'crank_knob.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('pool', 'pool.png', ajtxz_hcgame.AssetType.IMAGE);
@@ -42,6 +42,16 @@ ajtxz_hcgame.Preloader = function(){
         //Load Sound Effects & Music
         this.load.audio('button_click', './assets/sfx/button_click.m4a');
         this.load.audio('crank_noise', './assets/sfx/crank_noise.m4a');
+        this.load.audio('applause-medium_crowd', './assets/sfx/applause-medium_crowd.m4a');
+        this.load.audio('applause-small_crowd', './assets/sfx/applause-small_crowd.m4a');
+        this.load.audio('bird_hit', './assets/sfx/bird_hit.m4a');
+        this.load.audio('cannon_blast', './assets/sfx/cannon_blast.m4a');
+        this.load.audio('cheering-large_crowd', './assets/sfx/cheering-large_crowd.m4a');
+        this.load.audio('crash_water', './assets/sfx/crash_water.m4a');
+        this.load.audio('crash1', './assets/sfx/crash1.m4a');
+        this.load.audio('crash2', './assets/sfx/crash2.m4a');
+        this.load.audio('crowd_whisper', './assets/sfx/crowd_whisper.m4a');
+        this.load.audio('fuse_burning', './assets/sfx/fuse_burning.m4a');
     };
 
     this.create= function () {

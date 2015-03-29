@@ -78,22 +78,19 @@ ajtxz_hcgame.levelbase = function (pgame) {
     }
 
     function drawObstacles(){
-        game.obstacles = pgame.add.group();
-        game.obstacles.enableBody = true;
-
         // Add pool
         pool = game.addAsset(690, 472, 'pool');
         pool.scale.setTo(0.7,0.7);
 
         // Add bird
-        bird = game.obstacles.create(pgame.world.centerX, 300, 'bird');
+        bird = game.solidObstacles.create(pgame.world.centerX, 300, 'bird');
 
         // Two animations, flying left and right.
         bird.animations.add('left', [0,1,2,3,4], 10, true);
         bird.animations.add('right', [5,6,7,8,9], 10, true);
 
         // Add water jet
-        var waterjet = game.obstacles.create(400, 349, 'waterjet');
+        var waterjet = game.waterObstacles.create(400, 349, 'waterjet');
         waterjet.scale.setTo(1.3,1.3);
         waterjet.body.immovable = true;
         waterjet.animations.add('shooting', [0,1,2], 2, true);
@@ -119,17 +116,6 @@ ajtxz_hcgame.levelbase = function (pgame) {
             }
         });
     };
-
-    function drawBackgrounds () {
-
-        game.addAsset(0, 0, 'level_background');
-        //game.controlBoard = game.addAsset(0, 480, 'control_board');
-        var g = pgame.add.group();
-        g.enableBody = true;
-
-        game.controlBoard = g.create(0, pgame.world.height - 110, 'control_board');
-        game.controlBoard.body.immovable = true;
-    }
 
 
     function initControls()
@@ -183,7 +169,16 @@ ajtxz_hcgame.levelbase = function (pgame) {
     }
 
     this.init = function() {
-        drawBackgrounds();
+        game.addAsset(0, 0, 'level_background');
+
+        game.solidObstacles = pgame.add.group();
+        game.solidObstacles.enableBody = true;
+        game.waterObstacles = pgame.add.group();
+        game.waterObstacles.enableBody = true;
+
+        game.controlBoard = game.solidObstacles.create(0, pgame.world.height - 110, 'control_board');
+        game.controlBoard.body.immovable = true;
+
         initControls();
         drawCannon_captain();
         drawObstacles();
@@ -223,8 +218,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
         }
         else {
             //////Determine collisions//////
-            pgame.physics.arcade.collide(captain, game.controlBoard);
-            pgame.physics.arcade.collide(captain, game.obstacles, collide_obstacles);
+            pgame.physics.arcade.collide(captain, game.solidObstacles, collide_obstacles);
+            pgame.physics.arcade.collide(captain, game.waterObstacles, collide_obstacles);
 
             //Rotate body of captain with parabola
             captain.rotation = captain.body.angle - CAPTAIN_ANGLE_OFFSET;

@@ -53,8 +53,6 @@ ajtxz_hcgame.game = function () {
                 _pGame.load.image(key, addr);
             }
 
-            //TODO add audio type condition
-
         };
 
 
