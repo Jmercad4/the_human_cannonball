@@ -5,7 +5,7 @@
 
 var ajtxz_hcgame = {
 
-    "AssetType" : {
+    AssetType : {
         AUDIO: 0,
         IMAGE: 1
     },
@@ -25,7 +25,7 @@ var ajtxz_hcgame = {
                 maxScreen: true,    //Display game in max width + auto rescale
                 DEBUG: false,    //Display debug info to console
                 width: 1000,
-                height: 600
+                height: 665
 
             }, opt || {});
         }());
