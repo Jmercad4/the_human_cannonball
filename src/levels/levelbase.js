@@ -225,6 +225,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
             //////Determine collisions//////
             pgame.physics.arcade.collide(captain, game.controlBoard);
             pgame.physics.arcade.collide(captain, game.obstacles, collide_obstacles);
+
+            captain.rotation = captain.body.angle - CAPTAIN_ANGLE_OFFSET;
         }
 
 
