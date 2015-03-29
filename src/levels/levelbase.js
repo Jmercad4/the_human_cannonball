@@ -10,7 +10,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
     var SLIDER_Y_POS = 575;
     var CANNON_DEFAULT = -Math.PI/10.0; //45 degrees
     var CAPTAIN_DEFAULT = Math.PI/4.0; //45 degrees
-    var CAPTAIN_ANGLE_OFFSET = -Math.PI/2.0
+    var CAPTAIN_ANGLE_OFFSET = -Math.PI/2.0;
     var MAX_VELOCITY = 1000; //NEED TO FIND BEST VALUE
     var cb_x = 80, cb_y = 506;
     var cs_x = cb_x - 14, cs_y = cb_y - 6;
@@ -34,6 +34,11 @@ ajtxz_hcgame.levelbase = function (pgame) {
     //Global flags
     var inMotion = false; //Is the captain flying
 
+    function reloadLevel(levelNum){
+        if(levelNum == 1)
+            pgame.state.start('lvl1_1');
+    }
+
     function killLife(){
         if(life3.alive == true)
             life3.kill();
@@ -41,9 +46,6 @@ ajtxz_hcgame.levelbase = function (pgame) {
             life2.kill();
         else if(life1.alive == true)
             life1.kill();
-        else
-            // level failed
-            ;
     }
 
     function handleCollision(object1, object2) {
@@ -68,7 +70,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         captain.body.velocity = 0;
         captain.body.gravity.y = 0;
-        
+
         captain.x = cb_x - 3;
         captain.y = cb_y - 5;
         captain.rotation = CAPTAIN_DEFAULT + crank.rotation/4;
@@ -205,8 +207,11 @@ ajtxz_hcgame.levelbase = function (pgame) {
     function initLives(){
         // Initialize lives
         life1 = game.addAsset(pgame.world.width-180, pgame.world.height-105, 'life');
+        life1.scale.setTo(0.7, 0.7);
         life2 = game.addAsset(pgame.world.width-120, pgame.world.height-105, 'life');
+        life2.scale.setTo(0.7, 0.7);
         life3 = game.addAsset(pgame.world.width-60, pgame.world.height-105, 'life');
+        life3.scale.setTo(0.7, 0.7);
     }
 
     this.init = function() {
@@ -281,6 +286,9 @@ ajtxz_hcgame.levelbase = function (pgame) {
             pgame.physics.arcade.overlap(captain, bird, handleCollision);
             pgame.physics.arcade.overlap(captain, game.controlBoard, handleCollision);
             pgame.physics.arcade.overlap(captain, pool, handleCollision);
+
+            if(life1.alive == false)
+                reloadLevel(1);
         }
 
 

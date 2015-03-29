@@ -66,7 +66,7 @@ ajtxz_hcgame.Preloader = function(){
 
     };
 
-    this.update= function () {
+    this.loadUpdate= function () {
         // Update percentage of loading progress
         percentage = this.load.progress;
         percentageText.setText(percentage  + "%");
