@@ -12,27 +12,45 @@ ajtxz_hcgame.levelbase = function (pgame) {
     var CAPTAIN_DEFAULT = Math.PI/4.0; //45 degrees
     var CAPTAIN_ANGLE_OFFSET = -Math.PI/2.0
     var MAX_VELOCITY = 1000; //NEED TO FIND BEST VALUE
+    var cb_x = 80, cb_y = 506;
+    var cs_x = cb_x - 14, cs_y = cb_y - 6;
 
     //Game
     var game = ajtxz_hcgame.game;
 
+    //SFX
+    var SFX;
+
     //Controls
-    var crank, crank_knob, crank_noise_sfx;
+    var crank, crank_knob;
     var fire_button;
     var slider_button, slider_box, slider_bar;
 
-    //Obstacles
-    var cannon_body;
-    var captain;
-    var pool;
-    var bird;
+    //Objects
+    var cannon_body, captain, pool;
+    var bird, waterjet;
 
-    //Global booleans
+    //Global flags
     var inMotion = false; //Is the captain flying
 
-    function collide_obstacles(){
-        // Handle collision with obstacles
+    function handleCollision(object1, object2) {
+        if (object2.key == 'control_board' || object2.key == 'bird') {
+            var selection = Math.random() % 2;
+            if (selection = 0)
+                SFX.crash1.play('', 0, 1, false, false);
+            else
+                SFX.crash2.play('', 0, 1, false, false);
 
+            if (object2.key == 'bird')
+                SFX.bird_hit.play('', 0, 1, false, false);
+        }
+        else if (object2.key == 'waterjet' || object2.key == 'pool')
+            SFX.crash_water.play('', 0, 1, false, false);
+
+        captain.body.velocity = 0;
+        captain.body.gravity.y = 0;
+
+        enableControls();
     }
 
     //Returns velocity with respect to current gunpowder level
@@ -59,17 +77,15 @@ ajtxz_hcgame.levelbase = function (pgame) {
         fire_button.inputEnabled = true;
     }
 
-    function drawCannon_captain() {
-
-        var cb_x = 80, cb_y = 506;
-        var cs_x = cb_x - 14, cs_y = cb_y - 6;
-
+    function initCaptain() {
         captain = game.addAsset(cb_x - 3, cb_y - 5, 'captain');
         captain.rotation = CAPTAIN_DEFAULT;
         captain.pivot = new PIXI.Point(16, 61);
         captain.animations.add('flying', [0,1,2,3,4,5,6,7], 5, true);
         captain.animations.play('flying');
+    }
 
+    function initCannon() {
         cannon_body = game.addAsset(cb_x, cb_y, 'cannon_body');
         cannon_body.anchor.setTo(0.42, 0.70);
         cannon_body.rotation = CANNON_DEFAULT;
@@ -77,22 +93,20 @@ ajtxz_hcgame.levelbase = function (pgame) {
         game.addAsset(cs_x, cs_y, 'cannon_stand');
     }
 
-    function drawObstacles(){
+    function initObstacles(){
         // Add pool
         pool = game.addAsset(690, 472, 'pool');
         pool.scale.setTo(0.7,0.7);
 
         // Add bird
-        bird = game.solidObstacles.create(pgame.world.centerX, 300, 'bird');
-
+        bird = game.addAsset(pgame.world.centerX, 300, 'bird');
         // Two animations, flying left and right.
         bird.animations.add('left', [0,1,2,3,4], 10, true);
         bird.animations.add('right', [5,6,7,8,9], 10, true);
 
         // Add water jet
-        var waterjet = game.waterObstacles.create(400, 349, 'waterjet');
+        waterjet = game.addAsset(400, 349, 'waterjet');
         waterjet.scale.setTo(1.3,1.3);
-        waterjet.body.immovable = true;
         waterjet.animations.add('shooting', [0,1,2], 2, true);
         waterjet.animations.play('shooting');
 
@@ -133,8 +147,6 @@ ajtxz_hcgame.levelbase = function (pgame) {
         crank_knob.inputEnabled = true;
         crank_knob.input.useHandCursor = true;
 
-        crank_noise_sfx = pgame.add.audio('crank_noise');
-
         ////Initialize Gunpowder Slider////
         slider_box = game.addAsset(SLIDER_X_POS, SLIDER_Y_POS, 'slider_box'); //Load slider button
         slider_bar = game.addAsset(SLIDER_X_POS+13, SLIDER_Y_POS+20, 'slider_bar'); //Load slider button
@@ -164,27 +176,40 @@ ajtxz_hcgame.levelbase = function (pgame) {
         }, this, null, null, 1, 0);
 
         fire_button.input.useHandCursor = true;
-        var button_click_sfx = pgame.add.audio('button_click');
-        fire_button.setDownSound(button_click_sfx);
+        fire_button.setDownSound(SFX.button_click);
     }
 
     this.init = function() {
         game.addAsset(0, 0, 'level_background');
+        game.controlBoard = game.addAsset(0, pgame.world.height - 110, 'control_board');
 
-        game.solidObstacles = pgame.add.group();
-        game.solidObstacles.enableBody = true;
-        game.waterObstacles = pgame.add.group();
-        game.waterObstacles.enableBody = true;
-
-        game.controlBoard = game.solidObstacles.create(0, pgame.world.height - 110, 'control_board');
-        game.controlBoard.body.immovable = true;
+        SFX = {
+            bird_hit: pgame.add.audio('bird_hit'),
+            crash1: pgame.add.audio('crash1'),
+            crash2: pgame.add.audio('crash2'),
+            crash_water: pgame.add.audio('crash_water'),
+            button_click: pgame.add.audio('button_click'),
+            crank_noise: pgame.add.audio('crank_noise'),
+            applause_medium_crowd: pgame.add.audio('applause-medium_crowd'),
+            applause_small_crowd: pgame.add.audio('applause-small_crowd'),
+            cheering_large_crowd: pgame.add.audio('cheering_large_crowd'),
+            cannon_blast: pgame.add.audio('cannon_blast'),
+            crowd_whisper: pgame.add.audio('crowd_whisper'),
+            fuse_burning: pgame.add.audio('fuse_burning')
+        }
 
         initControls();
-        drawCannon_captain();
-        drawObstacles();
+        initCaptain();
+        initCannon();
+        initObstacles();
 
         //Set up world physics
-        pgame.physics.arcade.enable(captain);
+        pgame.physics.enable(captain, Phaser.Physics.ARCADE);
+        pgame.physics.enable(waterjet, Phaser.Physics.ARCADE);
+        pgame.physics.enable(bird, Phaser.Physics.ARCADE);
+        pgame.physics.enable(pool, Phaser.Physics.ARCADE);
+        pgame.physics.enable(game.controlBoard, Phaser.Physics.ARCADE);
+
         captain.body.collideWorldBounds = true;
     };
 
@@ -212,14 +237,17 @@ ajtxz_hcgame.levelbase = function (pgame) {
                     cannon_body.rotation = CANNON_DEFAULT + angle / 4; //cannon max is 90, min is 0
 
                     //Play crank sound effect
-                    crank_noise_sfx.play('', 0, 1, false, false);
+                    SFX.crank_noise.play('', 0, 1, false, false);
                 }
             }
         }
         else {
             //////Determine collisions//////
-            pgame.physics.arcade.collide(captain, game.solidObstacles, collide_obstacles);
-            pgame.physics.arcade.collide(captain, game.waterObstacles, collide_obstacles);
+            //pgame.physics.arcade.collide(captain, , handleCollision('ground'));
+            pgame.physics.arcade.overlap(captain, waterjet, handleCollision);
+            pgame.physics.arcade.overlap(captain, bird, handleCollision);
+            pgame.physics.arcade.overlap(captain, game.controlBoard, handleCollision);
+            pgame.physics.arcade.overlap(captain, pool, handleCollision);
 
             //Rotate body of captain with parabola
             captain.rotation = captain.body.angle - CAPTAIN_ANGLE_OFFSET;
