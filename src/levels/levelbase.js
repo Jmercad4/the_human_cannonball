@@ -10,6 +10,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
     var SLIDER_Y_POS = 575;
     var CANNON_DEFAULT = -Math.PI/10.0; //45 degrees
     var CAPTAIN_DEFAULT = Math.PI/4.0; //45 degrees
+    var CAPTAIN_ANGLE_OFFSET = -Math.PI/2.0
     var MAX_VELOCITY = 1000; //NEED TO FIND BEST VALUE
 
     //Game
@@ -142,12 +143,17 @@ ajtxz_hcgame.levelbase = function (pgame) {
         ////Initialize Fire Button////
         var fire_button = pgame.add.button(640, 573, 'fire_button', function() {
             captain.body.gravity.y = 800;
-            //Velocity determined by current slider and wheel positions
+
+            //Velocity determined by current slider and crank positions
             var velocity = getVelocity();
-            new Phaser.Text(game, 300,300,velocity);
-            //Need rotation angle to get velocity_x and velocity_y values from velocity
-            captain.body.velocity.setTo(velocity, -velocity);
+            var angle = captain.rotation;
+
+            //Need rotation to get velocity_x and velocity_y values from velocity
+            var velocity_x = velocity * Math.cos(angle + CAPTAIN_ANGLE_OFFSET);
+            var velocity_y = velocity * Math.sin(angle + CAPTAIN_ANGLE_OFFSET);
+            captain.body.velocity.setTo(velocity_x, velocity_y);
         }, this, null, null, 1, 0);
+
         fire_button.input.useHandCursor = true;
         var button_click_sfx = pgame.add.audio('button_click');
         fire_button.setDownSound(button_click_sfx);
@@ -159,9 +165,9 @@ ajtxz_hcgame.levelbase = function (pgame) {
         drawCannon_captain();
         drawObstacles();
 
+        //Set up world physics
         pgame.physics.arcade.enable(captain);
         captain.body.collideWorldBounds = true;
-        captain.body.bounce.y = 0.3;
 
     };
 
@@ -196,9 +202,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
                 //Play crank sound effect
                 crank_noise_sfx.play('', 0, 1, false, false);
             }
-        }
-
-
+        }gi
 
     }
 
