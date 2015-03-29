@@ -34,6 +34,14 @@ ajtxz_hcgame.levelbase = function (pgame) {
     //Global flags
     var inMotion = false; //Is the captain flying
 
+    function reloadLevel(levelNum){
+        switch (levelNum){
+            case 1: this.state.start('lvl1_1');
+                break;
+
+        }
+    }
+
     function killLife(){
         if(life3.alive == true)
             life3.kill();
