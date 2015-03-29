@@ -53,7 +53,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
         game.obstacles.enableBody = true;
 
         // Add pool
-        pool = game.addAsset(590, 330, 'pool');
+        pool = game.addAsset(690, 472, 'pool');
         pool.scale.setTo(0.7,0.7);
 
         // Add bird
@@ -64,10 +64,10 @@ ajtxz_hcgame.levelbase = function (pgame) {
         bird.animations.add('right', [5,6,7,8,9], 10, true);
 
         // Add water jet
-        var waterjet = game.obstacles.create(400, 290, 'waterjet');
-        waterjet.scale.setTo(1,1);
+        var waterjet = game.obstacles.create(400, 349, 'waterjet');
+        waterjet.scale.setTo(1.3,1.3);
         waterjet.body.immovable = true;
-        waterjet.animations.add('shooting', [0,1], 2, true);
+        waterjet.animations.add('shooting', [0,1,2], 2, true);
         waterjet.animations.play('shooting');
 
         // Add fire rings
