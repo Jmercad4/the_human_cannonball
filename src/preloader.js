@@ -40,6 +40,11 @@ ajtxz_hcgame.Preloader = function(){
         game.loadAsset('pool', 'pool.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('life', 'life.png', ajtxz_hcgame.AssetType.IMAGE);
 
+        game.loadAsset('menu_title', 'menu_title.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('menu_start', 'menu_start.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('menu_level', 'menu_level.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('menu_instr', 'menu_instr.png', ajtxz_hcgame.AssetType.IMAGE);
+
         //Load Sound Effects & Music
         this.load.audio('button_click', './assets/sfx/button_click.m4a');
         this.load.audio('crank_noise', './assets/sfx/crank_noise.m4a');
@@ -57,7 +62,7 @@ ajtxz_hcgame.Preloader = function(){
 
     this.create= function () {
         //Call to main menu
-        this.time.events.add(Phaser.Timer.SECOND/2, function(){this.state.start('lvl1_1');}, this);
+        this.time.events.add(Phaser.Timer.SECOND/2, function(){this.state.start('menu');}, this);
 
     };
 
