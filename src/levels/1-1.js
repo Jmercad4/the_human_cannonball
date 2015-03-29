@@ -1,4 +1,3 @@
-
 ajtxz_hcgame.level1_1 = function () {
 
     var game = ajtxz_hcgame.game;
@@ -15,6 +14,7 @@ ajtxz_hcgame.level1_1 = function () {
         var birdMoveTo = this.world.width - 100;
         var birdMoveTime = 2000;
         levelbase.birdFly(birdMoveTo, birdMoveTime);
+        // cursors = pgame.input.keyboard.createCursorKeys();
     }
 
     this.update = function() {
