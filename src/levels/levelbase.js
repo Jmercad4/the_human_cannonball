@@ -26,9 +26,20 @@ ajtxz_hcgame.levelbase = function (pgame) {
     //Global Game Components
     var bird, slider_button, slider_box, slider_bar;
 
+    //Global booleans
+    var inMotion = false; //Is the captain flying
+
     function collide_obstacles(){
         // Handle collision with obstacles
 
+    }
+
+    //Returns velocity with respect to current gunpowder level
+    function getVelocity()
+    {
+        var x_position = slider_button.x - slider_box.x; //Determine x position of slider button within box
+        var percentage = x_position / (slider_box.width - slider_button.width); //Determine percentage of gunpowder bar filled
+        return percentage * MAX_VELOCITY; //Determine velocity
     }
 
     function drawCannon_captain() {
@@ -91,14 +102,6 @@ ajtxz_hcgame.levelbase = function (pgame) {
             }
         });
     };
-
-    //Returns velocity with respect to current gunpowder level
-    function getVelocity()
-    {
-        var x_position = slider_button.x - slider_box.x; //Determine x position of slider button within box
-        var percentage = x_position / (slider_box.width - slider_button.width); //Determine percentage of gunpowder bar filled
-        return percentage * MAX_VELOCITY; //Determine velocity
-    }
 
     function drawBackgrounds () {
 
@@ -168,7 +171,6 @@ ajtxz_hcgame.levelbase = function (pgame) {
         //Set up world physics
         pgame.physics.arcade.enable(captain);
         captain.body.collideWorldBounds = true;
-
     };
 
     this.defaultUpdate = function()
@@ -202,7 +204,9 @@ ajtxz_hcgame.levelbase = function (pgame) {
                 //Play crank sound effect
                 crank_noise_sfx.play('', 0, 1, false, false);
             }
-        }gi
+        }
+
+
 
     }
 
