@@ -51,12 +51,10 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         captain.body.velocity = 0;
         captain.body.gravity.y = 0;
-
-        captain.visible = false;
-        captain.rotation = CAPTAIN_DEFAULT;
+        
         captain.x = cb_x - 3;
         captain.y = cb_y - 5;
-        captain.visible = true;
+        captain.rotation = CAPTAIN_DEFAULT + crank.rotation/4;
 
         enableControls();
     }
@@ -249,15 +247,15 @@ ajtxz_hcgame.levelbase = function (pgame) {
             }
         }
         else {
+            //Rotate body of captain with parabola
+            captain.rotation = captain.body.angle - CAPTAIN_ANGLE_OFFSET;
+
             //////Determine collisions//////
             //pgame.physics.arcade.collide(captain, , handleCollision('ground'));
             pgame.physics.arcade.overlap(captain, waterjet, handleCollision);
             pgame.physics.arcade.overlap(captain, bird, handleCollision);
             pgame.physics.arcade.overlap(captain, game.controlBoard, handleCollision);
             pgame.physics.arcade.overlap(captain, pool, handleCollision);
-
-            //Rotate body of captain with parabola
-            captain.rotation = captain.body.angle - CAPTAIN_ANGLE_OFFSET;
         }
 
 
