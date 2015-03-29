@@ -35,11 +35,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
     var inMotion = false; //Is the captain flying
 
     function reloadLevel(levelNum){
-        switch (levelNum){
-            case 1: this.state.start('lvl1_1');
-                break;
-
-        }
+        if(levelNum == 1)
+            pgame.state.start('lvl1_1');
     }
 
     function killLife(){
@@ -49,9 +46,6 @@ ajtxz_hcgame.levelbase = function (pgame) {
             life2.kill();
         else if(life1.alive == true)
             life1.kill();
-        else
-            // level failed
-            ;
     }
 
     function handleCollision(object1, object2) {
@@ -76,7 +70,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         captain.body.velocity = 0;
         captain.body.gravity.y = 0;
-        
+
         captain.x = cb_x - 3;
         captain.y = cb_y - 5;
         captain.rotation = CAPTAIN_DEFAULT + crank.rotation/4;
@@ -289,6 +283,9 @@ ajtxz_hcgame.levelbase = function (pgame) {
             pgame.physics.arcade.overlap(captain, bird, handleCollision);
             pgame.physics.arcade.overlap(captain, game.controlBoard, handleCollision);
             pgame.physics.arcade.overlap(captain, pool, handleCollision);
+
+            if(life1.alive == false)
+                reloadLevel(1);
         }
 
 
