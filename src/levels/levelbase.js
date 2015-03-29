@@ -29,14 +29,30 @@ ajtxz_hcgame.levelbase = function (pgame) {
     //Objects
     var cannon_body, captain, pool;
     var bird, waterjet;
+    var life1, life2, life3;
 
     //Global flags
     var inMotion = false; //Is the captain flying
 
+    function killLife(){
+        if(life3.alive == true)
+            life3.kill();
+        else if(life2.alive == true)
+            life2.kill();
+        else if(life1.alive == true)
+            life1.kill();
+        else
+            // level failed
+            ;
+    }
+
     function handleCollision(object1, object2) {
+        if(object2.key != 'pool')
+            killLife();
+
         if (object2.key == 'control_board' || object2.key == 'bird') {
             var selection = Math.random() % 2;
-            if (selection = 0)
+            if (selection == 0)
                 SFX.crash1.play('', 0, 1, false, false);
             else
                 SFX.crash2.play('', 0, 1, false, false);
@@ -44,8 +60,9 @@ ajtxz_hcgame.levelbase = function (pgame) {
             if (object2.key == 'bird')
                 SFX.bird_hit.play('', 0, 1, false, false);
         }
-        else if (object2.key == 'waterjet' || object2.key == 'pool')
+        else if (object2.key == 'waterjet' || object2.key == 'pool') {
             SFX.crash_water.play('', 0, 1, false, false);
+        }
 
         SFX.crowd_whisper.play('', 0, 0.2, false, false);
 
@@ -185,6 +202,13 @@ ajtxz_hcgame.levelbase = function (pgame) {
         fire_button.setDownSound(SFX.button_click);
     }
 
+    function initLives(){
+        // Initialize lives
+        life1 = game.addAsset(pgame.world.width-180, pgame.world.height-105, 'life');
+        life2 = game.addAsset(pgame.world.width-120, pgame.world.height-105, 'life');
+        life3 = game.addAsset(pgame.world.width-60, pgame.world.height-105, 'life');
+    }
+
     this.init = function() {
         game.addAsset(0, 0, 'level_background');
         game.controlBoard = game.addAsset(0, pgame.world.height - 110, 'control_board');
@@ -208,6 +232,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
         initCaptain();
         initCannon();
         initObstacles();
+        initLives();
 
         //Set up world physics
         pgame.physics.enable(captain, Phaser.Physics.ARCADE);

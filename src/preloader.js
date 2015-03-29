@@ -38,6 +38,7 @@ ajtxz_hcgame.Preloader = function(){
         game.loadAsset('crank', 'crank.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('crank_knob', 'crank_knob.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('pool', 'pool.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('life', 'life.png', ajtxz_hcgame.AssetType.IMAGE);
 
         //Load Sound Effects & Music
         this.load.audio('button_click', './assets/sfx/button_click.m4a');
