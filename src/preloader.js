@@ -22,7 +22,8 @@ ajtxz_hcgame.Preloader = function(){
         this.add.text(this.world.centerX - 50, this.world.centerY+70, 'LOADING...', {font: '18pt Arial', fill: "#000000", stroke: "#ffffff"});
         percentageText = this.add.text(this.world.centerX + 83, this.world.centerY + 90, percentage + '%', {font:'14pt Arial'});
 
-        // Load all assets for entire game
+        ///////Load all assets for entire game//////////
+        // Load Sprites
         game.loadAsset('cannon_body', 'cannon_body.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('cannon_stand', 'cannon_stand.png', ajtxz_hcgame.AssetType.IMAGE);
         this.load.spritesheet('captain', './assets/images/captain.png', 26, 61);
@@ -37,6 +38,10 @@ ajtxz_hcgame.Preloader = function(){
         game.loadAsset('crank', 'crank.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('crank_knob', 'crank_knob.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('pool', 'pool.png', ajtxz_hcgame.AssetType.IMAGE);
+
+        //Load Sound Effects & Music
+        this.load.audio('button_click', './assets/sfx/button_click.m4a');
+        this.load.audio('crank_noise', './assets/sfx/crank_noise.m4a');
     };
 
     this.create= function () {

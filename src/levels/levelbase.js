@@ -10,24 +10,53 @@ ajtxz_hcgame.levelbase = function (pgame) {
     var SLIDER_Y_POS = 575;
     var CANNON_DEFAULT = -Math.PI/10.0; //45 degrees
     var CAPTAIN_DEFAULT = Math.PI/4.0; //45 degrees
+    var CAPTAIN_ANGLE_OFFSET = -Math.PI/2.0
     var MAX_VELOCITY = 1000; //NEED TO FIND BEST VALUE
 
     //Game
     var game = ajtxz_hcgame.game;
-    var options = game.options;
 
-    // Obstacle variable
-    var crank, crank_knob;
+    //Controls
+    var crank, crank_knob, crank_noise_sfx;
+    var fire_button;
+    var slider_button, slider_box, slider_bar;
+
+    //Obstacles
     var cannon_body;
     var captain;
     var pool;
+    var bird;
 
-    //Global Game Components
-    var bird, slider_button, slider_box, slider_bar;
+    //Global booleans
+    var inMotion = false; //Is the captain flying
 
     function collide_obstacles(){
         // Handle collision with obstacles
 
+    }
+
+    //Returns velocity with respect to current gunpowder level
+    function getVelocity()
+    {
+        var x_position = slider_button.x - slider_box.x; //Determine x position of slider button within box
+        var percentage = x_position / (slider_box.width - slider_button.width); //Determine percentage of gunpowder bar filled
+        return percentage * MAX_VELOCITY; //Determine velocity
+    }
+
+    function disableControls()
+    {
+        inMotion = true;
+        crank_knob.inputEnabled = false;
+        slider_button.inputEnabled = false;
+        fire_button.inputEnabled = false;
+    }
+
+    function enableControls()
+    {
+        inMotion = false;
+        crank_knob.inputEnabled = true;
+        slider_button.inputEnabled = true;
+        fire_button.inputEnabled = true;
     }
 
     function drawCannon_captain() {
@@ -91,14 +120,6 @@ ajtxz_hcgame.levelbase = function (pgame) {
         });
     };
 
-    //Returns velocity with respect to current gunpowder level
-    function getVelocity()
-    {
-        var x_position = slider_button.x - slider_box.x; //Determine x position of slider button within box
-        var percentage = x_position / (slider_box.width - slider_button.width); //Determine percentage of gunpowder bar filled
-        return percentage * MAX_VELOCITY; //Determine velocity
-    }
-
     function drawBackgrounds () {
 
         game.addAsset(0, 0, 'level_background');
@@ -126,6 +147,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
         crank_knob.inputEnabled = true;
         crank_knob.input.useHandCursor = true;
 
+        crank_noise_sfx = pgame.add.audio('crank_noise');
+
         ////Initialize Gunpowder Slider////
         slider_box = game.addAsset(SLIDER_X_POS, SLIDER_Y_POS, 'slider_box'); //Load slider button
         slider_bar = game.addAsset(SLIDER_X_POS+13, SLIDER_Y_POS+20, 'slider_bar'); //Load slider button
@@ -138,15 +161,25 @@ ajtxz_hcgame.levelbase = function (pgame) {
         slider_button.input.boundsSprite = slider_box;
 
         ////Initialize Fire Button////
-        var fire_button = pgame.add.button(640, 573, 'fire_button', function() {
-            captain.body.gravity.y = 800;
-            //Velocity determined by current slider and wheel positions
-            var velocity = getVelocity();
-            new Phaser.Text(game, 300,300,velocity);
-            //Need rotation angle to get velocity_x and velocity_y values from velocity
-            captain.body.velocity.setTo(velocity, -velocity);
+        fire_button = pgame.add.button(640, 573, 'fire_button', function() {
+            if (!inMotion) {
+                disableControls();
+                captain.body.gravity.y = 800;
+
+                //Velocity determined by current slider and crank positions
+                var velocity = getVelocity();
+                var angle = captain.rotation;
+
+                //Need rotation to get velocity_x and velocity_y values from velocity
+                var velocity_x = velocity * Math.cos(angle + CAPTAIN_ANGLE_OFFSET);
+                var velocity_y = velocity * Math.sin(angle + CAPTAIN_ANGLE_OFFSET);
+                captain.body.velocity.setTo(velocity_x, velocity_y);
+            }
         }, this, null, null, 1, 0);
+
         fire_button.input.useHandCursor = true;
+        var button_click_sfx = pgame.add.audio('button_click');
+        fire_button.setDownSound(button_click_sfx);
     }
 
     this.init = function() {
@@ -155,42 +188,46 @@ ajtxz_hcgame.levelbase = function (pgame) {
         drawCannon_captain();
         drawObstacles();
 
+        //Set up world physics
         pgame.physics.arcade.enable(captain);
         captain.body.collideWorldBounds = true;
-        captain.body.bounce.y = 0.3;
-
     };
 
     this.defaultUpdate = function()
     {
-        //////Determine collisions//////
-        pgame.physics.arcade.collide(captain, game.controlBoard);
-        pgame.physics.arcade.collide(captain, game.obstacles, collide_obstacles);
+        if (!inMotion) {
+            /////Slider Functionality///////
+            //If slider button is being dragged, fill slider box with bar
+            if (slider_button.input.pointerDragged())
+                slider_bar.width = slider_button.x - slider_box.x;
 
-        /////Slider Functionality///////
-        //If slider button is being dragged, fill slider box with bar
-        if (slider_button.input.pointerDragged())
-            slider_bar.width = slider_button.x - slider_box.x;
+            /////Crank Functionality//////
+            var current_angle = Phaser.Math.ceilTo(cannon_body.angle); //Current angle of cannon body
+            var previous_crank_angle = crank.rotation; //Angle of crank prior to change
+            //If crank knob is being selected, determine rotations
+            if (crank_knob.input.pointerDown()) {
+                //Find angle between crank knob and crank center
+                var click = pgame.input.activePointer;
+                var angle = Phaser.Math.angleBetween(crank.x, crank.y, click.x, click.y);
 
-        /////Crank Functionality//////
-        var current_angle = Phaser.Math.ceilTo(cannon_body.angle); //Current angle of cannon body
-        console.log('current angle : '+current_angle);
-        //If crank knob is being selected, determine rotations
-        if (crank_knob.input.pointerDown())
-        {
-            //Find angle between crank knob and crank center
-            var click = pgame.input.activePointer;
-            var angle = Phaser.Math.angleBetween(crank.x, crank.y, click.x, click.y);
+                //Rotate crank and cannon accordingly. Block if 90 or 0 degrees is reached. Do nothing is no change in angleg
+                if ((angle != previous_crank_angle) && (current_angle != -62 || angle < 0) && (current_angle != 27 || angle > 0)) {
+                    crank_knob.rotation = crank.rotation = angle;
+                    captain.rotation = CAPTAIN_DEFAULT + angle / 4;
+                    cannon_body.rotation = CANNON_DEFAULT + angle / 4; //cannon max is 90, min is 0
 
-            //Rotate crank and cannon accordingly. Block if 90 or 0 degrees is reached
-            if ((current_angle != -62 || angle < 0) && (current_angle != 27 || angle > 0))
-            {
-                crank_knob.rotation = crank.rotation = angle;
-                captain.rotation = CAPTAIN_DEFAULT + angle / 4;
-                cannon_body.rotation = CANNON_DEFAULT + angle / 4; //cannon max is 90, min is 0
+                    //Play crank sound effect
+                    crank_noise_sfx.play('', 0, 1, false, false);
+                }
             }
         }
+        else {
+            //////Determine collisions//////
+            pgame.physics.arcade.collide(captain, game.controlBoard);
+            pgame.physics.arcade.collide(captain, game.obstacles, collide_obstacles);
 
+            captain.rotation = captain.body.angle - CAPTAIN_ANGLE_OFFSET;
+        }
 
 
     }
