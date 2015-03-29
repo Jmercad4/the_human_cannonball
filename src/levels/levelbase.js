@@ -226,6 +226,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
             pgame.physics.arcade.collide(captain, game.controlBoard);
             pgame.physics.arcade.collide(captain, game.obstacles, collide_obstacles);
 
+            //Rotate body of captain with parabola
             captain.rotation = captain.body.angle - CAPTAIN_ANGLE_OFFSET;
         }
 
