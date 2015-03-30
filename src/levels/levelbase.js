@@ -116,8 +116,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
     function reinitCaptain() {
         initCaptain();
         pgame.physics.enable(character_group, Phaser.Physics.ARCADE);
-        //pgame.physics.enable(captain, Phaser.Physics.ARCADE);
-        //captain.body.setSize(3, 5, 10.5, 30.5); //fix bounding box
+        captain.body.setSize(3, 5, 10.5, 30.5); //fix bounding box
     }
 
     function initCannon() {
