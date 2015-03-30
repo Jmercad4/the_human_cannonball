@@ -27,7 +27,8 @@ ajtxz_hcgame.bootState = function () {
 
         if(ajtxz_hcgame.initialized) {
             // Load picture for loading page
-            game.loadAsset('boot_logo', 'boot_logo.jpg', ajtxz_hcgame.AssetType.IMAGE);
+            game.loadAsset('boot_background', 'boot_background.png', ajtxz_hcgame.AssetType.IMAGE);
+            this.load.spritesheet('captain', './assets/images/captain.png', 26, 61);
         }
     }
 

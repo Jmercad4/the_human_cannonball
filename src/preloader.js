@@ -4,10 +4,14 @@ ajtxz_hcgame.Preloader = function(){
     var percentage = 0; // Loading percentage
     var percentageText; // Text of loading percentage
     var preloadBar;     // Progress bar shape
+    var captainLoad;
 
     this.preload= function () {
         // Display loading page picture
-        game.addAsset(this.world.centerX - 170,0,'boot_logo');
+        game.addAsset(0, 0, 'boot_background');
+        captainLoad = game.addAsset(this.world.centerX, 300, 'captain');
+        captainLoad.anchor.setTo(0.5, 0.5);
+        captainLoad.scale.setTo(1.5, 1.5);
 
         // Add progress bar
         preloadBar = this.add.graphics(this.world.centerX-49,this.world.centerY+103);
@@ -26,7 +30,6 @@ ajtxz_hcgame.Preloader = function(){
         // Load Sprites
         game.loadAsset('cannon_body', 'cannon_body.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('cannon_stand', 'cannon_stand.png', ajtxz_hcgame.AssetType.IMAGE);
-        this.load.spritesheet('captain', './assets/images/captain.png', 26, 61);
         game.loadAsset('level_background', 'level_background.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('control_board', 'control_board.png', ajtxz_hcgame.AssetType.IMAGE);
         this.load.spritesheet('fire_button', './assets/images/fire_button.png', 120, 76);
@@ -67,6 +70,7 @@ ajtxz_hcgame.Preloader = function(){
 
     this.loadUpdate= function () {
         // Update percentage of loading progress
+        captainLoad.rotation += 0.1;
         percentage = this.load.progress;
         percentageText.setText(percentage  + "%");
         preloadBar.scale.x = percentage * 0.01;
