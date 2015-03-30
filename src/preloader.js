@@ -39,8 +39,7 @@ ajtxz_hcgame.Preloader = function(){
         game.loadAsset('crank_knob', 'crank_knob.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('pool', 'pool.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('life', 'life.png', ajtxz_hcgame.AssetType.IMAGE);
-
-        game.loadAsset('menu_title', 'menu_title.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('menu_background', 'menu_background.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('menu_start', 'menu_start.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('menu_level', 'menu_level.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('menu_instr', 'menu_instr.png', ajtxz_hcgame.AssetType.IMAGE);
