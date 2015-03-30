@@ -14,12 +14,16 @@ ajtxz_hcgame.levelbase = function (pgame) {
     var MAX_VELOCITY = 1000; //NEED TO FIND BEST VALUE
     var cb_x = 80, cb_y = 506;
     var cs_x = cb_x - 14, cs_y = cb_y - 6;
+    var CAP_INITIAL_X = cb_x - 3, CAP_INITIAL_Y = cb_y - 5;
 
     //Game
     var game = ajtxz_hcgame.game;
 
     //SFX
     var SFX;
+
+    //Groups
+    var character_group, obstacle_group;
 
     //Controls
     var crank, crank_knob;
@@ -71,9 +75,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
         captain.body.velocity = 0;
         captain.body.gravity.y = 0;
 
-        captain.x = cb_x - 3;
-        captain.y = cb_y - 5;
-        captain.rotation = CAPTAIN_DEFAULT + crank.rotation/4;
+        captain.destroy();
+        reinitCaptain();
 
         enableControls();
     }
@@ -91,7 +94,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
         inMotion = true;
         crank_knob.inputEnabled = false;
         slider_button.inputEnabled = false;
-        fire_button.inputEnabled = false;
+        //fire_button.inputEnabled = false;
     }
 
     function enableControls()
@@ -99,15 +102,24 @@ ajtxz_hcgame.levelbase = function (pgame) {
         inMotion = false;
         crank_knob.inputEnabled = true;
         slider_button.inputEnabled = true;
-        fire_button.inputEnabled = true;
+        //fire_button.inputEnabled = true;
     }
 
     function initCaptain() {
-        captain = game.addAsset(cb_x - 3, cb_y - 5, 'captain');
-        captain.rotation = CAPTAIN_DEFAULT;
+        captain = character_group.create(CAP_INITIAL_X, CAP_INITIAL_Y, 'captain');
+        captain.rotation = CAPTAIN_DEFAULT + crank.rotation / 4;
         captain.pivot = new PIXI.Point(16, 61);
         captain.animations.add('flying', [0,1,2,3,4,5,6,7], 5, true);
         captain.animations.play('flying');
+    }
+
+    function reinitCaptain() {
+        //initCaptain();
+        captain = character_group.create(CAP_INITIAL_X, CAP_INITIAL_Y, 'captain');
+        captain.rotation = CAPTAIN_DEFAULT + crank.rotation / 4;
+        captain.pivot = new PIXI.Point(16, 61);
+        //pgame.physics.enable(captain, Phaser.Physics.ARCADE);
+        //captain.body.setSize(3, 5, 10.5, 30.5); //fix bounding box
     }
 
     function initCannon() {
@@ -120,17 +132,17 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
     function initObstacles(){
         // Add pool
-        pool = game.addAsset(690, 472, 'pool');
+        pool = obstacle_group.create(690, 472, 'pool');
         pool.scale.setTo(0.7,0.7);
 
         // Add bird
-        bird = game.addAsset(pgame.world.centerX, 300, 'bird');
+        bird = obstacle_group.create(pgame.world.centerX, 300, 'bird');
         // Two animations, flying left and right.
         bird.animations.add('left', [0,1,2,3,4], 10, true);
         bird.animations.add('right', [5,6,7,8,9], 10, true);
 
         // Add water jet
-        waterjet = game.addAsset(400, 349, 'waterjet');
+        waterjet = obstacle_group.create(400, 349, 'waterjet');
         waterjet.scale.setTo(1.3,1.3);
         waterjet.animations.add('shooting', [0,1,2], 2, true);
         waterjet.animations.play('shooting');
@@ -216,7 +228,9 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
     this.init = function() {
         game.addAsset(0, 0, 'level_background');
-        game.controlBoard = game.addAsset(0, pgame.world.height - 110, 'control_board');
+        character_group = pgame.add.group();
+        obstacle_group = pgame.add.group();
+        game.controlBoard = obstacle_group.create(0, pgame.world.height - 110, 'control_board');
 
         SFX = {
             bird_hit: pgame.add.audio('bird_hit'),
@@ -240,12 +254,9 @@ ajtxz_hcgame.levelbase = function (pgame) {
         initLives();
 
         //Set up world physics
-        pgame.physics.enable(captain, Phaser.Physics.ARCADE);
+        pgame.physics.enable(character_group, Phaser.Physics.ARCADE);
         captain.body.setSize(3, 5, 10.5, 30.5); //fix bounding box
-        pgame.physics.enable(waterjet, Phaser.Physics.ARCADE);
-        pgame.physics.enable(bird, Phaser.Physics.ARCADE);
-        pgame.physics.enable(pool, Phaser.Physics.ARCADE);
-        pgame.physics.enable(game.controlBoard, Phaser.Physics.ARCADE);
+        pgame.physics.enable(obstacle_group, Phaser.Physics.ARCADE);
     };
 
     this.defaultUpdate = function()
@@ -281,11 +292,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
             captain.rotation = captain.body.angle - CAPTAIN_ANGLE_OFFSET;
 
             //////Determine collisions//////
-            //pgame.physics.arcade.collide(captain, , handleCollision('ground'));
-            pgame.physics.arcade.overlap(captain, waterjet, handleCollision);
-            pgame.physics.arcade.overlap(captain, bird, handleCollision);
-            pgame.physics.arcade.overlap(captain, game.controlBoard, handleCollision);
-            pgame.physics.arcade.overlap(captain, pool, handleCollision);
+            pgame.physics.arcade.overlap(character_group, obstacle_group, handleCollision);
 
             if(life1.alive == false)
                 reloadLevel(1);
