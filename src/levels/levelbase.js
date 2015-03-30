@@ -53,24 +53,28 @@ ajtxz_hcgame.levelbase = function (pgame) {
     }
 
     function handleCollision(object1, object2) {
-        if(object2.key != 'pool')
-            killLife();
-
         if (object2.key == 'control_board' || object2.key == 'bird') {
-            var selection = Math.random() % 2;
+            var selection = Math.round(Math.random());
+            console.log('selection: ' + selection);
             if (selection == 0)
-                SFX.crash1.play('', 0, 1, false, false);
+                SFX.crash1.play('', 0, 0.4, false, false);
             else
-                SFX.crash2.play('', 0, 1, false, false);
+                SFX.crash2.play('', 0, 0.4, false, false);
 
             if (object2.key == 'bird')
-                SFX.bird_hit.play('', 0, 1, false, false);
+                SFX.bird_hit.play('', 0, 0.4, false, false);
         }
         else if (object2.key == 'waterjet' || object2.key == 'pool') {
-            SFX.crash_water.play('', 0, 1, false, false);
+            SFX.crash_water.play('', 0, 0.4, false, false);
         }
 
-        SFX.crowd_whisper.play('', 0, 0.2, false, false);
+        if(object2.key != 'pool') {
+            killLife();
+            SFX.crowd_whisper.play('', 0, 0.5, false, false);
+        }
+        else {
+            SFX.applause_small_crowd.play('', 0, 0.6, false, false);
+        }
 
         captain.body.velocity = 0;
         captain.body.gravity.y = 0;
