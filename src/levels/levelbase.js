@@ -241,7 +241,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
         //Set up world physics
         pgame.physics.enable(captain, Phaser.Physics.ARCADE);
-        captain.body.setSize(5, 5, 10.5, 30.5); //fix bounding box
+        captain.body.setSize(3, 5, 10.5, 30.5); //fix bounding box
         pgame.physics.enable(waterjet, Phaser.Physics.ARCADE);
         pgame.physics.enable(bird, Phaser.Physics.ARCADE);
         pgame.physics.enable(pool, Phaser.Physics.ARCADE);
