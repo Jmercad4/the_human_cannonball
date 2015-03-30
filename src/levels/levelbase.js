@@ -160,7 +160,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
     function initControls()
     {
         ////Initialize Angle Crank////
-        crank = game.addAsset(90, 609, 'crank');
+        crank = game.addAsset(105, 609, 'crank');
         crank_knob = game.addAsset(crank.x, crank.y, 'crank_knob');
 
         crank.scale.setTo(0.8, 0.8);
@@ -184,7 +184,7 @@ ajtxz_hcgame.levelbase = function (pgame) {
         slider_button.input.boundsSprite = slider_box;
 
         ////Initialize Fire Button////
-        fire_button = pgame.add.button(640, 573, 'fire_button', function() {
+        fire_button = pgame.add.button(635, 573, 'fire_button', function() {
             if (!inMotion) {
                 disableControls();
                 captain.body.gravity.y = 800;
