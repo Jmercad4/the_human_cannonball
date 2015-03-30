@@ -114,10 +114,8 @@ ajtxz_hcgame.levelbase = function (pgame) {
     }
 
     function reinitCaptain() {
-        //initCaptain();
-        captain = character_group.create(CAP_INITIAL_X, CAP_INITIAL_Y, 'captain');
-        captain.rotation = CAPTAIN_DEFAULT + crank.rotation / 4;
-        captain.pivot = new PIXI.Point(16, 61);
+        initCaptain();
+        pgame.physics.enable(character_group, Phaser.Physics.ARCADE);
         //pgame.physics.enable(captain, Phaser.Physics.ARCADE);
         //captain.body.setSize(3, 5, 10.5, 30.5); //fix bounding box
     }
