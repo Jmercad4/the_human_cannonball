@@ -14,7 +14,7 @@ ajtxz_hcgame.Preloader = function(){
         captainLoad.scale.setTo(1.5, 1.5);
 
         // Add progress bar
-        preloadBar = this.add.graphics(this.world.centerX-49,this.world.centerY+103);
+        preloadBar = this.add.graphics(this.world.centerX-60, this.world.centerY+103);
         preloadBar.lineStyle(10, 0x000000, 1);
         preloadBar.moveTo(0,0);
         preloadBar.lineTo(126, 0);
@@ -23,7 +23,7 @@ ajtxz_hcgame.Preloader = function(){
         preloadBar.scale.x = 0;
         
         // Add text for progress indication
-        this.add.text(this.world.centerX - 50, this.world.centerY+70, 'LOADING...', {font: '18pt Arial', fill: "#000000", stroke: "#ffffff"});
+        this.add.text(this.world.centerX - 60, this.world.centerY+70, 'LOADING...', {font: '18pt Arial', fill: "#000000", stroke: "#ffffff"});
         percentageText = this.add.text(this.world.centerX + 83, this.world.centerY + 90, percentage + '%', {font:'14pt Arial'});
 
         ///////Load all assets for entire game//////////

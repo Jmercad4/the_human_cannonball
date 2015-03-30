@@ -206,12 +206,12 @@ ajtxz_hcgame.levelbase = function (pgame) {
 
     function initLives(){
         // Initialize lives
-        life1 = game.addAsset(pgame.world.width-180, pgame.world.height-105, 'life');
-        life1.scale.setTo(0.5, 0.5);
-        life2 = game.addAsset(pgame.world.width-120, pgame.world.height-105, 'life');
-        life2.scale.setTo(0.5, 0.5);
-        life3 = game.addAsset(pgame.world.width-60, pgame.world.height-105, 'life');
-        life3.scale.setTo(0.5, 0.5);
+        life1 = game.addAsset(pgame.world.width-170, pgame.world.height-97, 'life');
+        life1.scale.setTo(0.55, 0.55);
+        life2 = game.addAsset(pgame.world.width-109, pgame.world.height-97, 'life');
+        life2.scale.setTo(0.55, 0.55);
+        life3 = game.addAsset(pgame.world.width-51, pgame.world.height-97, 'life');
+        life3.scale.setTo(0.55, 0.55);
     }
 
     this.init = function() {
