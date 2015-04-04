@@ -115,7 +115,7 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
 
     this.initPool = function (x) {
         // Add pool
-        var pool = obstacle_group.create(x, 472, 'pool'); //690
+        var pool = obstacle_group.create(x, 472, 'pool');
         pool.scale.setTo(0.7,0.7);
 
         pgame.physics.enable(obstacle_group, Phaser.Physics.ARCADE);
@@ -123,7 +123,7 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
 
     this.initWaterJet = function(x) {
         // Add water jet
-        var waterjet = obstacle_group.create(x, 349, 'waterjet'); //400
+        var waterjet = obstacle_group.create(x, 349, 'waterjet');
         waterjet.scale.setTo(1.3,1.3);
         waterjet.animations.add('shooting', [0,1,2], 2, true);
         waterjet.animations.play('shooting');
@@ -133,14 +133,14 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
 
     this.initBird = function(motionDst, motionTime, x, y) {
         // Add bird
-        var bird = obstacle_group.create(x, y, 'bird'); //pgame.world.centerX, 300
+        var bird = obstacle_group.create(x, y, 'bird');
         // Two animations, flying left and right.
-        bird.animations.add('left', [0,1,2,3,4], 10, true);
-        bird.animations.add('right', [5,6,7,8,9], 10, true);
+        bird.animations.add('left', [0,1,2,3,4], 12, true);
+        bird.animations.add('right', [5,6,7,8,9], 12, true);
 
-        var bird_orientation = 1;
+        var bird_orientation = 0;
 
-        bird.animations.play('right');
+        bird.animations.play('left');
 
         var tweenbird = pgame.add.tween(bird).to({ x: motionDst }, motionTime, Phaser.Easing.Linear.None, true, 0, Number.POSITIVE_INFINITY, true);
 
@@ -204,11 +204,11 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
 
     function initLives(){
         // Initialize lives
-        var life1 = game.addAsset(pgame.world.width-170, pgame.world.height-97, 'life');
+        var life1 = game.addAsset(pgame.world.width-170, pgame.world.height-103, 'life');
         life1.scale.setTo(0.55, 0.55);
-        var life2 = game.addAsset(pgame.world.width-109, pgame.world.height-97, 'life');
+        var life2 = game.addAsset(pgame.world.width-109, pgame.world.height-103, 'life');
         life2.scale.setTo(0.55, 0.55);
-        var life3 = game.addAsset(pgame.world.width-51, pgame.world.height-97, 'life');
+        var life3 = game.addAsset(pgame.world.width-51, pgame.world.height-103, 'life');
         life3.scale.setTo(0.55, 0.55);
 
         lives = [life1, life2, life3];
@@ -218,7 +218,7 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
         game.addAsset(0, 0, 'level_background');
         character_group = pgame.add.group();
         obstacle_group = pgame.add.group();
-        game.controlBoard = obstacle_group.create(0, pgame.world.height - 110, 'control_board');
+        game.controlBoard = obstacle_group.create(0, pgame.world.height - 116, 'control_board');
 
         SFX = {
             bird_hit: pgame.add.audio('bird_hit'),

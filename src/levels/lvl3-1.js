@@ -1,29 +1,33 @@
 ajtxz_hcgame.level3_1 = function () {
 
-    var game = ajtxz_hcgame.game;
     var pgame = this;
-    var levelbase = new ajtxz_hcgame.levelbase(pgame, '31');
+    var levelbase;
+    var timer;
 
     this.preload = function() {
+        levelbase = new ajtxz_hcgame.levelbase(pgame, [3,1]);
     }
 
     this.create = function() {
         levelbase.init();
+        levelbase.initPool(800);
+        levelbase.initWaterJet(355);
+        levelbase.initBird(200, 1800, 600, 200);
 
-        // Set bird obstacle attributes and play
-        var birdMoveTo = this.world.width - 100;
-        var birdMoveTime = 2000;
-        levelbase.birdFly(birdMoveTo, birdMoveTime);
-        // cursors = pgame.input.keyboard.createCursorKeys();
+        //Display level intro
+        var lvl_intro = pgame.add.sprite(this.world.centerX, this.world.centerY-50, 'lvl_intro_3_1');
+        lvl_intro.anchor.setTo(0.5, 0.5);
+
+        //Initialize timer for level intro (kill it after 1 second)
+        timer = pgame.time.create(true);
+        timer.add(1000, function(){
+            lvl_intro.destroy();
+            pgame.add.sprite(10, 15, 'lvl_tag_3_1');
+        }, this);
+        timer.start();
     }
 
     this.update = function() {
         levelbase.defaultUpdate();
-    }
-
-    this.render = function(){
-        if (game.options.DEBUG) {
-            game.pgame().debug.bodyInfo(game.captain, 32, 64);
-        }
     }
 };
