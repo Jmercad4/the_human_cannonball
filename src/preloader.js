@@ -46,6 +46,36 @@ ajtxz_hcgame.Preloader = function(){
         game.loadAsset('menu_start', 'menu_start.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('menu_level', 'menu_level.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('menu_instr', 'menu_instr.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_1_1', 'lvl_tag_1_1.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_1_2', 'lvl_tag_1_2.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_1_3', 'lvl_tag_1_3.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_2_1', 'lvl_tag_2_1.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_2_2', 'lvl_tag_2_2.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_2_3', 'lvl_tag_2_3.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_3_1', 'lvl_tag_3_1.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_3_2', 'lvl_tag_3_2.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_3_3', 'lvl_tag_3_3.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_4_1', 'lvl_tag_4_1.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_4_2', 'lvl_tag_4_2.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_4_3', 'lvl_tag_4_3.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_5_1', 'lvl_tag_5_1.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_5_2', 'lvl_tag_5_2.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_tag_5_3', 'lvl_tag_5_3.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_1_1', 'lvl_intro_1_1.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_1_2', 'lvl_intro_1_2.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_1_3', 'lvl_intro_1_3.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_2_1', 'lvl_intro_2_1.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_2_2', 'lvl_intro_2_2.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_2_3', 'lvl_intro_2_3.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_3_1', 'lvl_intro_3_1.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_3_2', 'lvl_intro_3_2.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_3_3', 'lvl_intro_3_3.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_4_1', 'lvl_intro_4_1.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_4_2', 'lvl_intro_4_2.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_4_3', 'lvl_intro_4_3.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_5_1', 'lvl_intro_5_1.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_5_2', 'lvl_intro_5_2.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_intro_5_3', 'lvl_intro_5_3.png', ajtxz_hcgame.AssetType.IMAGE);
 
         //Load Sound Effects & Music
         this.load.audio('button_click', './assets/sfx/button_click.m4a');

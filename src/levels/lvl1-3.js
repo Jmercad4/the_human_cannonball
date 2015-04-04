@@ -2,7 +2,7 @@ ajtxz_hcgame.level1_3 = function () {
 
     var game = ajtxz_hcgame.game;
     var pgame = this;
-    var levelbase = new ajtxz_hcgame.levelbase(pgame);
+    var levelbase = new ajtxz_hcgame.levelbase(pgame, '13');
 
     this.preload = function() {
     }
