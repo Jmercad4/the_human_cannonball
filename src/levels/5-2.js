@@ -1,4 +1,4 @@
-ajtxz_hcgame.level1_1 = function () {
+ajtxz_hcgame.level5_2 = function () {
 
     var game = ajtxz_hcgame.game;
     var pgame = this;
