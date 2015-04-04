@@ -59,7 +59,10 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
         //If landed, play appropriate crowd noise, go to next level
         if(object2.key == 'pool') {
             SFX.applause_small_crowd.play('', 0, 0.6, false, false);
-            pgame.state.start(level[0] + '_' + ++level[1]);
+            if (level[1] == 3)
+                pgame.state.start(++level[0] + '_1');
+            else
+                pgame.state.start(level[0] + '_' + ++level[1]);
         }
         //If missed, play whispering, life - 1
         else {
@@ -120,7 +123,7 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
 
     this.initWaterJet = function(x) {
         // Add water jet
-        waterjet = obstacle_group.create(x, 349, 'waterjet'); //400
+        var waterjet = obstacle_group.create(x, 349, 'waterjet'); //400
         waterjet.scale.setTo(1.3,1.3);
         waterjet.animations.add('shooting', [0,1,2], 2, true);
         waterjet.animations.play('shooting');
@@ -130,7 +133,7 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
 
     this.initBird = function(motionDst, motionTime, x, y) {
         // Add bird
-        bird = obstacle_group.create(x, y, 'bird'); //pgame.world.centerX, 300
+        var bird = obstacle_group.create(x, y, 'bird'); //pgame.world.centerX, 300
         // Two animations, flying left and right.
         bird.animations.add('left', [0,1,2,3,4], 10, true);
         bird.animations.add('right', [5,6,7,8,9], 10, true);

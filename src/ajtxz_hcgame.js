@@ -69,7 +69,7 @@ ajtxz_hcgame.game = function () {
                 return;
             }
 
-            _pGame = new Phaser.Game(options.width, options.height, Phaser.AUTO, options.id);
+            _pGame = new Phaser.Game(options.width, options.height, Phaser.AUTO, options.id, null, false, true);
 
             //_pGame.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
             _pGame.state.add('boot', new ajtxz_hcgame.bootState);

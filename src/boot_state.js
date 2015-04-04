@@ -11,14 +11,11 @@ ajtxz_hcgame.bootState = function () {
     this.init = function() {
         game.log("boot state: starting")
 
-        this.scale.scaleMode = Phaser.ScaleManager.NO_SCALE;
-        if(game.options.maxScreen) {
-            this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            this.scale.pageAlignHorizontally = true;
-            this.scale.pageAlignVertically = true;
-            this.scale.setScreenSize(true);
-            this.stage.backgroundColor = '#ffffff';
-        }
+        this.scale.windowConstraints.bottom = "visual";
+        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.scale.pageAlignHorizontally = true;
+        this.scale.pageAlignVertically = true;
+        this.stage.backgroundColor = '#ffffff';
 
         pgame.physics.startSystem(Phaser.Physics.ARCADE);
     }
