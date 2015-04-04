@@ -1,7 +1,7 @@
 ajtxz_hcgame.level1_1 = function () {
 
     var pgame = this;
-    var levelbase = new ajtxz_hcgame.levelbase(pgame, '1_1');
+    var levelbase = new ajtxz_hcgame.levelbase(pgame, [1,1]);
     var timer;
     var lvl_intro;
 

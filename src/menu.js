@@ -40,7 +40,7 @@ ajtxz_hcgame.Menu = function () {
     var pgame = this;
 
     function playGame() {
-        pgame.state.start("lvl1_1");
+        pgame.state.start("1_1");
     }
     /*
      function instruct() {

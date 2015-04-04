@@ -40,7 +40,7 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
 
     function reloadLevel(levelNum){
         if(levelNum == 1)
-            pgame.state.start('lvl1_1');
+            pgame.state.start('1_1');
     }
 
     function killLife(){
@@ -55,7 +55,6 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
     function handleCollision(object1, object2) {
         if (object2.key == 'control_board' || object2.key == 'bird') {
             var selection = Math.round(Math.random());
-            console.log('selection: ' + selection);
             if (selection == 0)
                 SFX.crash1.play('', 0, 0.4, false, false);
             else
@@ -74,6 +73,7 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
         }
         else {
             SFX.applause_small_crowd.play('', 0, 0.6, false, false);
+            pgame.state.start(level[0] + '_' + ++level[1]);
         }
 
         captain.body.velocity = 0;
