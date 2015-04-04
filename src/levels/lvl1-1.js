@@ -1,23 +1,19 @@
 ajtxz_hcgame.level1_1 = function () {
 
     var pgame = this;
-    var levelbase = new ajtxz_hcgame.levelbase(pgame, [1,1]);
+    var levelbase;
     var timer;
-    var lvl_intro;
 
     this.preload = function() {
+        levelbase = new ajtxz_hcgame.levelbase(pgame, [1,1]);
     }
 
     this.create = function() {
         levelbase.init();
-
-        // Set bird obstacle attributes and play
-        var birdMoveTo = this.world.width - 100;
-        var birdMoveTime = 2000;
-        levelbase.birdFly(birdMoveTo, birdMoveTime);
+        levelbase.initPool(850);
 
         //Display level intro
-        lvl_intro = pgame.add.sprite(this.world.centerX, this.world.centerY-50, 'lvl_intro_1_1')
+        var lvl_intro = pgame.add.sprite(this.world.centerX, this.world.centerY-50, 'lvl_intro_1_1');
         lvl_intro.anchor.setTo(0.5, 0.5);
 
         //Initialize timer for level intro (kill it after 1 second)
