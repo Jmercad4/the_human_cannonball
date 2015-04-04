@@ -4,7 +4,7 @@
  * Reusable components for each level
  * @param pgame current phaser game instance
  */
-ajtxz_hcgame.levelbase = function (pgame) {
+ajtxz_hcgame.levelbase = function (pgame, level) {
     //Constants
     var SLIDER_X_POS = 230;
     var SLIDER_Y_POS = 575;

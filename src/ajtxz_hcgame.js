@@ -76,6 +76,20 @@ ajtxz_hcgame.game = function () {
             _pGame.state.add('preloader', new ajtxz_hcgame.Preloader);
             _pGame.state.add('menu', new ajtxz_hcgame.Menu);
             _pGame.state.add('lvl1_1', new ajtxz_hcgame.level1_1);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level1_2);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level1_3);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level2_1);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level2_2);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level2_3);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level3_1);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level3_2);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level3_3);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level4_1);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level4_2);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level4_3);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level5_1);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level5_2);
+            _pGame.state.add('lvl1_1', new ajtxz_hcgame.level5_3);
             _pGame.state.start('boot');
 
         };
