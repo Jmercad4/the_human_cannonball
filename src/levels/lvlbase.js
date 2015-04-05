@@ -56,11 +56,16 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
             SFX.crash_water.play('', 0, 0.4, false, false);
         }
 
-        //If landed, play appropriate crowd noise, go to next level
+        //If landed, play appropriate crowd noise, go to next level/stage
         if(object2.key == 'pool') {
             SFX.applause_small_crowd.play('', 0, 0.6, false, false);
-            if (level[1] == 3)
-                pgame.state.start(++level[0] + '_1');
+
+            //If last stage go to next level
+            if (level[1] == 3) {
+                game.unlocked_lvls[++level[0]]
+                pgame.state.start(level[0] + '_1');
+            }
+            //Otherwise go to next stage of level
             else
                 pgame.state.start(level[0] + '_' + ++level[1]);
         }
