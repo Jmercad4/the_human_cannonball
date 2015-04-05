@@ -76,6 +76,19 @@ ajtxz_hcgame.Preloader = function(){
         game.loadAsset('lvl_intro_5_1', 'lvl_intro_5_1.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('lvl_intro_5_2', 'lvl_intro_5_2.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('lvl_intro_5_3', 'lvl_intro_5_3.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('how_to_play', 'how_to_play_popup.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('instr1', 'instr1.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('instr2', 'instr2.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('instr3', 'instr3.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('instr4', 'instr4.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('instr5', 'instr5.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('instr6', 'instr6.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl_select', 'lvl_select_popup.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('locked_button', 'locked_lvl.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl1_button', 'lvl1_unlocked.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl2_button', 'lvl2_unlocked.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl3_button', 'lvl3_unlocked.png', ajtxz_hcgame.AssetType.IMAGE);
+
 
         //Load Sound Effects & Music
         this.load.audio('button_click', './assets/sfx/button_click.m4a');
