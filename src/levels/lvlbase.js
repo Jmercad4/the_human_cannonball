@@ -62,7 +62,7 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
 
             //If last stage go to next level
             if (level[1] == 3) {
-                game.unlocked_lvls[++level[0]]
+                game.unlocked_lvls[++level[0]] = true;
                 pgame.state.start(level[0] + '_1');
             }
             //Otherwise go to next stage of level
@@ -205,6 +205,11 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
 
         fire_button.input.useHandCursor = true;
         fire_button.setDownSound(SFX.button_click);
+g
+        /////Initialize Exit Sign///////
+        var exit_sign = pgame.add.button(915, 15, 'exit_sign', function() {pgame.state.start('menu');});
+        exit_sign.scale.setTo(0.7,0.7);
+        exit_sign.input.useHandCursor = true;
     }
 
     function initLives(){

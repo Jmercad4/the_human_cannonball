@@ -90,6 +90,7 @@ ajtxz_hcgame.Preloader = function(){
         game.loadAsset('lvl3_button', 'lvl3_unlocked.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('lvl4_button', 'lvl1_unlocked.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('lvl5_button', 'lvl2_unlocked.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('exit_sign', 'exit_sign.png', ajtxz_hcgame.AssetType.IMAGE);
 
 
         //Load Sound Effects & Music
