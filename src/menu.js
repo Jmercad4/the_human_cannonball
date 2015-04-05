@@ -144,8 +144,8 @@ ajtxz_hcgame.Menu = function () {
             //If outside is clicked, close popup
             if (pgame.input.activePointer.isDown && !level.input.pointerOver()) {
                 level.kill();
-                for (var i = 5; i > 0; --i) {
-                    lvl_select_buttons[i].kill();
+                for (var j = 5; j > 0; --j) {
+                    lvl_select_buttons[j].kill();
                     lvl_select_buttons.pop();
                 }
                 selection.kill();
