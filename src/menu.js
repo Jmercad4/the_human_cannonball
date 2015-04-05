@@ -7,7 +7,7 @@ ajtxz_hcgame.Menu = function () {
     //flags
     var howToOn = false, levelOn = false;
     //popups
-    var howTo, level;
+    var howTo, level, background;
     var selection;
 
     var game = ajtxz_hcgame.game;
@@ -77,7 +77,8 @@ ajtxz_hcgame.Menu = function () {
 
     this.create = function() {
         //Add background
-        pgame.add.image(0, 0, 'menu_background');
+        background = pgame.add.image(0, 0, 'menu_background');
+        background.inputEnabled = true;
 
         ////Add buttons////
         //Enter
@@ -142,7 +143,7 @@ ajtxz_hcgame.Menu = function () {
         //If Level Select pop up is on
         else if (levelOn) {
             //If outside is clicked, close popup
-            if (pgame.input.activePointer.isDown && !level.input.pointerOver()) {
+            if (pgame.input.activePointer.isDown && background.input.pointerOver()) {
                 level.kill();
                 for (var j = 5; j > 0; --j) {
                     lvl_select_buttons[j].kill();
