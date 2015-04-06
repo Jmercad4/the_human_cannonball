@@ -88,8 +88,8 @@ ajtxz_hcgame.Preloader = function(){
         game.loadAsset('lvl1_button', 'lvl1_unlocked.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('lvl2_button', 'lvl2_unlocked.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('lvl3_button', 'lvl3_unlocked.png', ajtxz_hcgame.AssetType.IMAGE);
-        game.loadAsset('lvl4_button', 'lvl1_unlocked.png', ajtxz_hcgame.AssetType.IMAGE);
-        game.loadAsset('lvl5_button', 'lvl2_unlocked.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl4_button', 'lvl4_unlocked.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('lvl5_button', 'lvl5_unlocked.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('exit_sign', 'exit_sign.png', ajtxz_hcgame.AssetType.IMAGE);
         this.load.spritesheet('ring_bg', './assets/images/ring_bg.png', 70, 124);
         this.load.spritesheet('ring_fg', './assets/images/ring_fg.png', 70, 124);

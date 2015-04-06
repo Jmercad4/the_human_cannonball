@@ -30,7 +30,7 @@ ajtxz_hcgame.game = function () {
             }
         }
 
-        this.unlocked_lvls = [null, true, false, false, false, false];
+        this.unlocked_lvls = [null, true, true, true, true, true];
         this.selected_lvl = 1;
 
         this.captain = {};
