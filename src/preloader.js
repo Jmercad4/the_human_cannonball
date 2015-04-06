@@ -43,9 +43,9 @@ ajtxz_hcgame.Preloader = function(){
         game.loadAsset('pool', 'pool.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('life', 'life.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('menu_background', 'menu_background.png', ajtxz_hcgame.AssetType.IMAGE);
-        game.loadAsset('menu_start', 'menu_start.png', ajtxz_hcgame.AssetType.IMAGE);
-        game.loadAsset('menu_level', 'menu_level.png', ajtxz_hcgame.AssetType.IMAGE);
-        game.loadAsset('menu_instr', 'menu_instr.png', ajtxz_hcgame.AssetType.IMAGE);
+        this.load.spritesheet('enter_button', './assets/images/enter_button.png', 186, 55);
+        this.load.spritesheet('level_select_button', './assets/images/level_select_button.png', 186, 55);
+        this.load.spritesheet('how_to_play_button', './assets/images/how_to_play_button.png', 186, 55);
         game.loadAsset('lvl_tag_1_1', 'lvl_tag_1_1.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('lvl_tag_1_2', 'lvl_tag_1_2.png', ajtxz_hcgame.AssetType.IMAGE);
         game.loadAsset('lvl_tag_1_3', 'lvl_tag_1_3.png', ajtxz_hcgame.AssetType.IMAGE);

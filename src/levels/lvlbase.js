@@ -315,12 +315,13 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
             if (captain.x > pgame.world.width)
                 handleCollision(null, game.controlBoard);
 
-            console.log("captain. x: "+captain.x + " captain.y: "+captain.y + " landed: "+landed);
             //Determine if successfully passed through rings (if any)
             for (var n = 0; n < rings.length; ++n) {
+                
                 //If captain hits infinite pole upwards, crash
                 if (captain.x + captain.width > rings[n].x && captain.y < rings[n].y)
                     handleCollision(null, game.controlBoard);
+
                 //Else if simply misses ring, landings don't count
                 else if (captain.x > rings[n].x && captain.x < rings[n].x+20 && captain.y > rings[n].y + rings[n].height)
                     landed = false;

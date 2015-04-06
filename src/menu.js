@@ -82,21 +82,18 @@ ajtxz_hcgame.Menu = function () {
 
         ////Add buttons////
         //Enter
-        enter_button = pgame.add.button(pgame.world.centerX, pgame.world.centerY + 35, 'menu_start', enter);
+        enter_button = pgame.add.button(pgame.world.centerX, pgame.world.centerY + 35, 'enter_button', enter, this, null, null, 1, 0);
         enter_button.input.useHandCursor = true;
-        enter_button.scale.setTo(0.9,0.9);
         enter_button.anchor.setTo(0.5, 0.5);
 
         //Level Select
-        level_button = pgame.add.button(pgame.world.centerX, pgame.world.centerY + 135, 'menu_level', lvlSelect);
+        level_button = pgame.add.button(pgame.world.centerX, pgame.world.centerY + 135, 'level_select_button', lvlSelect, this, null, null, 1, 0);
         level_button.input.useHandCursor = true;
-        level_button.scale.setTo(0.9,0.9);
         level_button.anchor.setTo(0.5, 0.5);
 
         //How to Play
-        howTo_button = pgame.add.button(pgame.world.centerX, pgame.world.centerY + 235, 'menu_instr', howToPlay);
+        howTo_button = pgame.add.button(pgame.world.centerX, pgame.world.centerY + 235, 'how_to_play_button', howToPlay, this, null, null, 1, 0);
         howTo_button.input.useHandCursor = true;
-        howTo_button.scale.setTo(0.9,0.9);
         howTo_button.anchor.setTo(0.5, 0.5);
     }
 
