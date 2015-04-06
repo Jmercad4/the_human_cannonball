@@ -132,7 +132,8 @@ ajtxz_hcgame.Menu = function () {
             {
                 nextInstr = pgame.time.now + 150; //timeout between clicks
 
-                prevInstr.kill();
+                if (i != 0)
+                    prevInstr.kill();
                 howTo.kill();
                 i = 0;
                 howToOn = false;

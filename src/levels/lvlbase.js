@@ -172,7 +172,7 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
         //Add Ring
         var ring_bg = obstacle_group_bg.create(x, y, 'ring_bg');
         var ring_fg = obstacle_group_fg.create(x, y, 'ring_fg');
-        var ring_pole = obstacle_group.create(x+29, y-213, 'ring_pole');
+        var ring_pole = obstacle_group.create(x+29, y-248, 'ring_pole');
         rings.push(ring_fg);
 
         ring_bg.animations.add('flames', [0,1], 3, true);
