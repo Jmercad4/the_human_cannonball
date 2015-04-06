@@ -11,6 +11,7 @@ ajtxz_hcgame.level1_1 = function () {
     this.create = function() {
         levelbase.init();
         levelbase.initPool(850);
+        levelbase.initRing(500, 100);
 
         //Display level intro
         var lvl_intro = pgame.add.sprite(this.world.centerX, this.world.centerY-50, 'lvl_intro_1_1');

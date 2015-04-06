@@ -23,7 +23,7 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
     var SFX;
 
     //Groups
-    var character_group, obstacle_group;
+    var character_group, obstacle_group, obstacle_group_bg, obstacle_group_fg;
 
     //Controls
     var crank, crank_knob;
@@ -33,14 +33,16 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
     //Objects
     var cannon_body, captain, pool;
     var lives;
+    var rings = [];
 
     //Global flags
     var inMotion = false; //Is the captain flying
+    var landed = true; //Did captain land
 
     function handleCollision(object1, object2) {
         /////Determine SFX/////
         //If ground, bird, or ring collision play crash noises
-        if (object2.key == 'control_board' || object2.key == 'bird') {
+        if (object2.key == 'control_board' || object2.key == 'bird' || object2.key == 'ring_pole') {
             var selection = Math.round(Math.random());
             if (selection == 0)
                 SFX.crash1.play('', 0, 0.4, false, false);
@@ -56,8 +58,11 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
             SFX.crash_water.play('', 0, 0.4, false, false);
         }
 
+        if (object2.key != 'pool')
+            landed = false;
+
         //If landed, play appropriate crowd noise, go to next level/stage
-        if(object2.key == 'pool') {
+        if(landed) {
             SFX.applause_small_crowd.play('', 0, 0.6, false, false);
 
             //If last stage go to next level
@@ -88,6 +93,7 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
                 initCaptain();
 
                 inMotion = false;
+                landed = true;
             }
         }
     }
@@ -162,6 +168,21 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
         pgame.physics.enable(obstacle_group, Phaser.Physics.ARCADE);
     };
 
+    this.initRing = function(x, y) {
+        //Add Ring
+        var ring_bg = obstacle_group_bg.create(x, y, 'ring_bg');
+        var ring_fg = obstacle_group_fg.create(x, y, 'ring_fg');
+        var ring_pole = obstacle_group.create(x+29, y-213, 'ring_pole');
+        rings.push(ring_fg);
+
+        ring_bg.animations.add('flames', [0,1], 3, true);
+        ring_fg.animations.add('flames', [0,1], 3, true);
+        ring_bg.animations.play('flames');
+        ring_fg.animations.play('flames');
+
+        pgame.physics.enable(obstacle_group, Phaser.Physics.ARCADE);
+    }
+
     function initControls()
     {
         ////Initialize Angle Crank////
@@ -205,7 +226,7 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
 
         fire_button.input.useHandCursor = true;
         fire_button.setDownSound(SFX.button_click);
-g
+
         /////Initialize Exit Sign///////
         var exit_sign = pgame.add.button(915, 15, 'exit_sign', function() {pgame.state.start('menu');});
         exit_sign.scale.setTo(0.7,0.7);
@@ -226,7 +247,9 @@ g
 
     this.init = function() {
         game.addAsset(0, 0, 'level_background');
+        obstacle_group_bg = pgame.add.group();
         character_group = pgame.add.group();
+        obstacle_group_fg = pgame.add.group();
         obstacle_group = pgame.add.group();
         game.controlBoard = obstacle_group.create(0, pgame.world.height - 116, 'control_board');
 
@@ -291,6 +314,17 @@ g
             pgame.physics.arcade.overlap(character_group, obstacle_group, handleCollision);
             if (captain.x > pgame.world.width)
                 handleCollision(null, game.controlBoard);
+
+            console.log("captain. x: "+captain.x + " captain.y: "+captain.y + " landed: "+landed);
+            //Determine if successfully passed through rings (if any)
+            for (var n = 0; n < rings.length; ++n) {
+                //If captain hits infinite pole upwards, crash
+                if (captain.x + captain.width > rings[n].x && captain.y < rings[n].y)
+                    handleCollision(null, game.controlBoard);
+                //Else if simply misses ring, landings don't count
+                else if (captain.x > rings[n].x && captain.x < rings[n].x+20 && captain.y > rings[n].y + rings[n].height)
+                    landed = false;
+            }
         }
     }
 
