@@ -10,8 +10,8 @@ ajtxz_hcgame.level3_1 = function () {
 
     this.create = function() {
         levelbase.init();
-        levelbase.initPool(800);
-        levelbase.initWaterJet(355);
+        levelbase.initPool(820);
+        levelbase.initWaterJet(467);
         levelbase.initBird(200, 1800, 600, 200);
 
         //Display level intro

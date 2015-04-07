@@ -10,9 +10,10 @@ ajtxz_hcgame.level4_3 = function () {
 
     this.create = function() {
         levelbase.init();
-        levelbase.initPool(800);
-        levelbase.initWaterJet(355);
-        levelbase.initBird(200, 1800, 600, 200);
+        levelbase.initPool(755);
+        levelbase.initWaterJet(430);
+        levelbase.initBird(40, 2000, 375, 200);
+        levelbase.initRing(435, 150);
 
         //Display level intro
         var lvl_intro = pgame.add.sprite(this.world.centerX, this.world.centerY-50, 'lvl_intro_4_3');

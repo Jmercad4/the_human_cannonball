@@ -65,8 +65,11 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
         if(landed) {
             SFX.applause_small_crowd.play('', 0, 0.6, false, false);
 
+            //If final level, go to
+            if (level[0] == 5 && level[1] == 3)
+                pgame.state.start('menu');
             //If last stage go to next level
-            if (level[1] == 3) {
+            else if (level[1] == 3) {
                 game.unlocked_lvls[++level[0]] = true;
                 pgame.state.start(level[0] + '_1');
             }
@@ -113,7 +116,7 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
         captain.animations.add('flying', [0,1,2,3,4,5,6,7], 5, true);
         captain.animations.play('flying');
         pgame.physics.enable(character_group, Phaser.Physics.ARCADE);
-        captain.body.setSize(3, 5, 10.5, 30.5); //fix bounding box
+        captain.body.setSize(3, 5, 12, 30.5); //fix bounding box
     }
 
     function initCannon() {
@@ -315,11 +318,13 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
             if (captain.x > pgame.world.width)
                 handleCollision(null, game.controlBoard);
 
+            console.log('landed: ' + landed);
             //Determine if successfully passed through rings (if any)
+            var captain_width = captain.x + captain.witdh;
             for (var n = 0; n < rings.length; ++n) {
                 
                 //If captain hits infinite pole upwards, crash
-                if (captain.x + captain.width > rings[n].x && captain.y < rings[n].y)
+                if (captain_width > rings[n].x && captain_width < rings[n].x+20 && captain.y < rings[n].y)
                     handleCollision(null, game.controlBoard);
 
                 //Else if simply misses ring, landings don't count

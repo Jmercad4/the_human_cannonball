@@ -10,9 +10,11 @@ ajtxz_hcgame.level5_1 = function () {
 
     this.create = function() {
         levelbase.init();
-        levelbase.initPool(800);
-        levelbase.initWaterJet(355);
-        levelbase.initBird(200, 1800, 600, 200);
+        levelbase.initPool(755);
+        levelbase.initWaterJet(270);
+        levelbase.initBird(700, 2000, 900, 200);
+        levelbase.initRing(280, 150);
+        levelbase.initRing(430, 75);
 
         //Display level intro
         var lvl_intro = pgame.add.sprite(this.world.centerX, this.world.centerY-50, 'lvl_intro_5_1');

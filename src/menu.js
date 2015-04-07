@@ -26,6 +26,7 @@ ajtxz_hcgame.Menu = function () {
 
     function enter() {
         pgame.state.start(game.selected_lvl+'_1');
+        //pgame.state.start('5_3');
     }
 
     function levelSelection(sprite, pointer) {
