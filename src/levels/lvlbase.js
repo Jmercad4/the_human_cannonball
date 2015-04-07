@@ -67,7 +67,6 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
 
             //If final level, go to
             if (level[0] == 5 && level[1] == 3) {
-                game.unlocked_lvls[5] = true;
                 pgame.state.start('congrats');
             }
             //If last stage go to next level
