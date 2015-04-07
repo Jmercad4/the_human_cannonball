@@ -94,6 +94,7 @@ ajtxz_hcgame.Preloader = function(){
         this.load.spritesheet('ring_bg', './assets/images/ring_bg.png', 70, 124);
         this.load.spritesheet('ring_fg', './assets/images/ring_fg.png', 70, 124);
         game.loadAsset('ring_pole', 'ring_pole.png', ajtxz_hcgame.AssetType.IMAGE);
+        game.loadAsset('congrats_screen', 'congrats_screen.png', ajtxz_hcgame.AssetType.IMAGE);
 
 
         //Load Sound Effects & Music

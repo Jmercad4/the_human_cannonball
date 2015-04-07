@@ -92,10 +92,10 @@ ajtxz_hcgame.game = function () {
             _pGame.state.add('5_1', new ajtxz_hcgame.level5_1);
             _pGame.state.add('5_2', new ajtxz_hcgame.level5_2);
             _pGame.state.add('5_3', new ajtxz_hcgame.level5_3);
+            _pGame.state.add('congrats', new ajtxz_hcgame.congrats);
             _pGame.state.start('boot');
 
         };
-
 
     };
 

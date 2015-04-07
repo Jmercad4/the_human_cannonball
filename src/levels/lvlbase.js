@@ -66,8 +66,10 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
             SFX.applause_small_crowd.play('', 0, 0.6, false, false);
 
             //If final level, go to
-            if (level[0] == 5 && level[1] == 3)
-                pgame.state.start('menu');
+            if (level[0] == 5 && level[1] == 3) {
+                game.unlocked_lvls[5] = true;
+                pgame.state.start('congrats');
+            }
             //If last stage go to next level
             else if (level[1] == 3) {
                 game.unlocked_lvls[++level[0]] = true;
