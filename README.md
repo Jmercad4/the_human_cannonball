@@ -1,6 +1,8 @@
 # hci-human-canonball
 An online game to launch a human canon ball to a safety net.
 
+The game can is hosted at http://phalaric.github.io/hci-human-cannonball/
+
 ## Team Info
 
 Zhao (Joe) Lin (zlin45@uwo.ca)
