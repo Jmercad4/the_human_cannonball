@@ -1,8 +1,8 @@
-# hci-human-canonball
+# the_human_cannonball
 An online game involving launching a human cannon ball to safety.
 The aim is to introduce the basics of projectile motion.
 
-The game is hosted at http://phalaric.github.io/hci-human-cannonball/
+The game is hosted at http://phalaric.github.io/the_human_cannonball/
 
 ## Team Info
 
