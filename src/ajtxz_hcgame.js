@@ -65,6 +65,18 @@ ajtxz_hcgame.game = function () {
         this.init = function () {
             self.log("starting game...");
 
+            //Restore unlocked levels
+            if (document.cookie != '') {
+                var unlocked_lvls = document.cookie.split(',');
+
+                for (var i = 0; i < 5; ++i) {
+                    if (unlocked_lvls[i].charAt(0) == 't')
+                        this.unlocked_lvls[i+1] = true;
+                    else
+                        this.unlocked_lvls[i+1] = false;
+                }
+            }
+
             //Make sure Phaser is included
             if (typeof Phaser == 'undefined') {
                 console.log('Phaser not installed');

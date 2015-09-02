@@ -72,6 +72,7 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
             //If last stage go to next level
             else if (level[1] == 3) {
                 game.unlocked_lvls[++level[0]] = true;
+                document.cookie = game.unlocked_lvls.toString();
                 pgame.state.start(level[0] + '_1');
             }
             //Otherwise go to next stage of level
