@@ -31,6 +31,7 @@ ajtxz_hcgame.game = function () {
         }
 
         this.unlocked_lvls = [null, true, false, false, false, false];
+
         this.selected_lvl = 1;
 
         this.captain = {};
@@ -63,18 +64,21 @@ ajtxz_hcgame.game = function () {
         };
 
         this.init = function () {
-            self.log("starting game...");
+            console.log(document.cookie);
 
+            if (document.cookie == '') {
+                document.cookie = "lvl1=t";
+                document.cookie = "lvl2=f";
+                document.cookie = "lvl3=f";
+                document.cookie = "lvl4=f";
+                document.cookie = "lvl5=f";
+            }
+            
             //Restore unlocked levels
-            if (document.cookie != '') {
-                var unlocked_lvls = document.cookie.split(',');
-
-                for (var i = 0; i < 5; ++i) {
-                    if (unlocked_lvls[i].charAt(0) == 't')
-                        this.unlocked_lvls[i+1] = true;
-                    else
-                        this.unlocked_lvls[i+1] = false;
-                }
+            var cookie_unlocked = document.cookie.split(';');
+            for (var i = 1; i < 5; ++i) {
+                if (cookie_unlocked[i].charAt(6) == 't')
+                    this.unlocked_lvls[i+1] = true;
             }
 
             //Make sure Phaser is included

@@ -72,7 +72,8 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
             //If last stage go to next level
             else if (level[1] == 3) {
                 game.unlocked_lvls[++level[0]] = true;
-                document.cookie = game.unlocked_lvls.toString();
+                console.log("lvl"+level[0]+"=t");
+                document.cookie = "lvl"+level[0]+"=t";
                 pgame.state.start(level[0] + '_1');
             }
             //Otherwise go to next stage of level
@@ -320,7 +321,6 @@ ajtxz_hcgame.levelbase = function (pgame, level) {
             if (captain.x > pgame.world.width)
                 handleCollision(null, game.controlBoard);
 
-            console.log('landed: ' + landed);
             //Determine if successfully passed through rings (if any)
             var captain_width = captain.x + captain.witdh;
             for (var n = 0; n < rings.length; ++n) {
